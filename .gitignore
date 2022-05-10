@@ -1,3 +1,7 @@
 gmao_venv/
 gmao/__pycache__
 .idea
+db.sqlite3
+ASSETS/__pycache__/
+ASSETS/migrations/__pycache__/
+gmao/.my_pgpass
