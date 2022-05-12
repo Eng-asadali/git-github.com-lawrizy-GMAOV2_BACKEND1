@@ -13,10 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path,include
+from .views import CompanyViewSet
+from rest_framework import routers
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/',include('ASSETS.urls'))
-]
+router = routers.SimpleRouter()
+router.register(r'company', CompanyViewSet) # le r devant la chaine de caractère signifie raw, donc la chaine de
+# caractere doit être traitée de manière brut
+# sans gérer d'eventuels caractères d'echapement
+
+urlpatterns = router.urls
