@@ -7,4 +7,4 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Company
-        fields = ['id', 'company_name', 'company_description','url']#'__all__'
+        fields = '__all__'
