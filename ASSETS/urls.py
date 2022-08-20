@@ -13,12 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from .views import CompanyViewSet
+from .views import CompanyViewSet, UploadCompanyView
 from rest_framework import routers
+from  django.urls import path
 
+# pour les viewset on utilise router register
 router = routers.SimpleRouter()
 router.register(r'company', CompanyViewSet) # le r devant la chaine de caractère signifie raw, donc la chaine de
 # caractere doit être traitée de manière brut
 # sans gérer d'eventuels caractères d'echapement
 
-urlpatterns = router.urls
+# pour les Apiview on utilise path
+urlpatterns = [
+    path('uploadCompany/', UploadCompanyView.as_view())
+]
+
+urlpatterns += router.urls
