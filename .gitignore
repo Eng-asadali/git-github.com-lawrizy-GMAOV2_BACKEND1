@@ -5,3 +5,5 @@ db.sqlite3
 ASSETS/__pycache__/
 ASSETS/migrations/__pycache__/
 gmao/.my_pgpass
+ASSETS/models/__pycache__/
+pictures/

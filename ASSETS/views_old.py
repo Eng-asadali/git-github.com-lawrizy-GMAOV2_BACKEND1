@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Company
-from .serializers import CompanySerializer
+from .serializers_old import CompanySerializer
 
 from rest_framework.views import APIView # used to manage the upload company file
 from rest_framework.parsers import FormParser, MultiPartParser # pour gerer upload fichier
