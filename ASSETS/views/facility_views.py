@@ -9,8 +9,9 @@ class FacilityViewset(viewsets.ModelViewSet):
     queryset = Facility.objects.all()
     serializer_class = FacilitySerializer
 
+    # la methode update permet d'intercepter la request et voir le contenu avant le serializer
     def update(self, request, *args, **kwargs):
-        print("AZIZ request.data: ",request.data)
+        #print("AZIZ request.data: ",request.data)
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
@@ -23,3 +24,12 @@ class FacilityViewset(viewsets.ModelViewSet):
             instance._prefetched_objects_cache = {}
 
         return Response(serializer.data)
+
+    # la methode get_serializer permet interception de la request avant traitement du serializer
+    def get_serializer(self, *args, **kwargs):
+        # leave this intact
+        serializer_class = self.get_serializer_class()
+        kwargs["context"] = self.get_serializer_context()
+
+        #print("AZZ req: ",self.request.data)
+        return serializer_class(*args, **kwargs)

@@ -24,4 +24,4 @@ urlpatterns = [
     path('api/', include('ASSETS.urls'))
 ]
 
-#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # to show the images = served staticly
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # pour upload des images
