@@ -26,7 +26,7 @@ router.register(r'facility',FacilityViewset)
 
 # pour les Apiview on utilise path
 urlpatterns = [
-    path('uploadCompany/', UploadCompanyView.as_view())
+    path('uploadCompany/', UploadCompanyView.as_view()) #used for csv file batch
 ]
 
 urlpatterns += router.urls

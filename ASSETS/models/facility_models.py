@@ -5,7 +5,7 @@ from .company_models import Company
 class Facility(models.Model):
     facility_name = models.CharField(max_length=500, null=False)
     street = models.CharField(max_length=500, null=True)
-    number = models.IntegerField(null=True)
+    number = models.CharField(null=True,max_length=10)
     postal_code = models.CharField(max_length=5, null=True)
     locality = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)
