@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from .views import CompanyViewSet, UploadCompanyView, FacilityViewset
+from .views import CompanyViewSet, UploadCompanyView, FacilityViewset, FloorViewSet
 from rest_framework import routers
 from  django.urls import path
 
@@ -23,6 +23,7 @@ router.register(r'company', CompanyViewSet) # le r devant la chaine de caractèr
 # caractere doit être traitée de manière brut
 # sans gérer d'eventuels caractères d'echapement
 router.register(r'facility',FacilityViewset)
+router.register(r'floor',FloorViewSet)
 
 # pour les Apiview on utilise path
 urlpatterns = [
