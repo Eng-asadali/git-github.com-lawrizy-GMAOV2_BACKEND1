@@ -10,4 +10,7 @@ class FloorModel(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['floor', 'facility'], name='unique_floor_per_facility'),
         ]
+
+    def __str__(self):
+        return self.floor
         
