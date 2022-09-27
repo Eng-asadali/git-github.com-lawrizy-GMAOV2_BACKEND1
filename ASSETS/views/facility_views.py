@@ -33,9 +33,9 @@ class FacilityViewset(viewsets.ModelViewSet):
     # après il faut valider les données du serializer avec is_valid()
     # après il faut save()
     def partial_update(self, request, *args, **kwargs):
-        #print("Aziz partial update request.data: ",request.data)
+        print("Aziz partial update request.data: ",request.data)
         current_facility = self.get_object()  # pour récupérer l'objet de la db
-        #print("Aziz patch self.get_object: ",current_facility)
+        print("Aziz patch self.get_object: ",current_facility)
         serialized = FacilitySerializer(current_facility,request.data, partial=True,context={'request': request})
         #print("Aziz patch serialized: ",serialized)
         if serialized.is_valid():
