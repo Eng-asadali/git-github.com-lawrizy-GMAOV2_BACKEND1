@@ -14,6 +14,9 @@ class Facility(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT, null=False, related_name='facility') #related name is for request from company.facility
     image = models.ImageField(upload_to='media/pictures/facility', null=True) # upload_to is the folder where we store
 
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['company', 'facility_name'], name='uniqueConst_1_facility_per_company')]
+
     def __str__(self):
         return self.facility_name
 

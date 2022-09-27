@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from ..models import Facility
-from ..serializers import FacilitySerializer
+from ..serializers import FacilitySerializer, CompanySerializer
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser,FormParser
 from rest_framework import status
@@ -51,5 +51,26 @@ class FacilityViewset(viewsets.ModelViewSet):
         serializer_class = self.get_serializer_class()
         kwargs["context"] = self.get_serializer_context()
 
-        print("AZZ get_serializer req: ",self.request.data)
+        #print("AZZ get_serializer req: ",self.request.data)
         return serializer_class(*args, **kwargs)
+
+    # create() est appelé lors du POST mais comme
+    # on reçoit le CompanySerializer il faut le gérer avec un override du create()
+    def create(self, request, *args, **kwargs):
+        company = request.data.get("company")
+        print("Aziz req data: ",request.data)
+        data = request.data
+        #data["company"]=company
+        serializer = FacilitySerializer(data=data, context={'request':request}) # le context est utilise pour la RESPONSE qui
+                                                                                # necessite serializer.data
+        print("Aziz  serial.initial_data: ", serializer.initial_data)
+        #print("Aziz  serial: ", serializer)
+        if serializer.is_valid():
+            #print("Aziz  serial.data after is_valid: ", serializer.data)
+            serializer.save()
+            print("Aziz serial after save: ", serializer.data)
+            return Response(status=status.HTTP_201_CREATED,data=serializer.data)
+        else:
+            print("Aziz  serial.data: ", serializer.data)
+            print("Aziz serial error: ", serializer.errors)
+            return Response(status=status.HTTP_400_BAD_REQUEST,data=serializer.errors)
