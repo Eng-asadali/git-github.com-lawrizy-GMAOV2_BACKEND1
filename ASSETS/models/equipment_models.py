@@ -5,7 +5,7 @@ from.room_models import RoomModel
 class EquipmentFamilyModel(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=250, null=True, blank=True)
-    parent_id = models.ForeignKey('self', on_delete=models.PROTECT, null=True, related_name='children')
+    parent_id = models.ForeignKey('self', on_delete=models.PROTECT, null=True, related_name='children', blank=True)
 
     def __str__(self):
         return self.name
