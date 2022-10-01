@@ -9,3 +9,6 @@ ASSETS/models/__pycache__/
 pictures/
 ASSETS/serializers/__pycache__/
 ASSETS/views/__pycache__/
+WORKS/migrations/__pycache__/
+WORKS/__pycache__/
+WORKS/views/__pycache__/
