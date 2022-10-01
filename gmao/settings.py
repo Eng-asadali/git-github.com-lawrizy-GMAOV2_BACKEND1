@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'ASSETS.apps.AssetsConfig',
+    'WORKS.apps.WorksConfig',
 ]
 
 MIDDLEWARE = [
