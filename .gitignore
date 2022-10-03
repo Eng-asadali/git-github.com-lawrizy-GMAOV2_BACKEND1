@@ -12,3 +12,5 @@ ASSETS/views/__pycache__/
 WORKS/migrations/__pycache__/
 WORKS/__pycache__/
 WORKS/views/__pycache__/
+WORKS/models/__pycache__/
+WORKS/serializers/__pycache__/
