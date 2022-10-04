@@ -17,8 +17,8 @@ class JobModel(models.Model):
     """
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    job_type = models.ForeignKey(JobTypeModel, on_delete=models.PROTECT, null=False, related_name='job_type')
-    domain = models.ForeignKey(DomainModel, on_delete=models.PROTECT, null=False, related_name='domain')
+    job_type_id = models.ForeignKey(JobTypeModel, on_delete=models.PROTECT, null=False, related_name='job_type')
+    domain_id = models.ForeignKey(DomainModel, on_delete=models.PROTECT, null=False, related_name='domain')
 
     def __str__(self):
         return self.name
