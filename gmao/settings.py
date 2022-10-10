@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'ASSETS.apps.AssetsConfig',
     'WORKS.apps.WorksConfig',
+    'HR.apps.HrConfig',
 ]
 
 MIDDLEWARE = [
