@@ -1,9 +1,9 @@
-from django.shortcuts import render
 from rest_framework import viewsets
-from .serializer import ProfileSerializer
-from .models import ProfileModel
+from .serializer import ProfileSerializer, UserSerializer
+from django.contrib.auth.models import User
 # Create your views here.
 
-class ProfileViewset(viewsets.ModelViewSet):
-    serializer_class = ProfileSerializer
-    queryset = ProfileModel.objects.all()
+
+class UserViewset(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()

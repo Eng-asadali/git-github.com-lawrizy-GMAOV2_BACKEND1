@@ -1,7 +1,7 @@
 from rest_framework import urls,routers
-from .views import ProfileViewset
+from .views import UserViewset
 
 router = routers.SimpleRouter()
-router.register(r'profile', ProfileViewset)
+router.register(r'user', UserViewset)
 
 urlpatterns = router.urls

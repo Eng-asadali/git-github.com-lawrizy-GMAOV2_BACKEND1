@@ -7,10 +7,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = '__all__'
 
-class ProfileSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.CharField(source='user.username')
     email = serializers.CharField(source='user.email')
     password = serializers.CharField(source='user.password')
     class Meta:
         model = ProfileModel
-        fields = ["username", "email", "password"]
+        fields = ["username", "email", "password","url"]
