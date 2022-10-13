@@ -14,6 +14,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user.save()
         return user
 
+    #implementé de manière à mettre uniquement le password à jour
+    def update(self, instance, validated_data):
+        # print("instance: ", type(instance))
+        # user = User.objects.get(username=instance)
+        # print("user: ", user)
+        instance.set_password(raw_password=validated_data["password"])
+        instance.save()
+        return instance
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.CharField(source='user.username')
