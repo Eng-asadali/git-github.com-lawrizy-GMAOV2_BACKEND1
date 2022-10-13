@@ -17,13 +17,13 @@ class WorkOrderModel(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=1000)
     room = models.ForeignKey(RoomModel, on_delete=models.PROTECT, null=True, blank=False, related_name='work_order')
-    job_type = models.ForeignKey(JobTypeModel, on_delete=models.PROTECT, null=True, blank=False, related_name='job_type')
+    job_type = models.ForeignKey(JobTypeModel, on_delete=models.PROTECT, null=True, blank=False, related_name='work_orders')
     status = models.ForeignKey(WorkStatusModel, on_delete=models.PROTECT, null=True)
     equipment = models.ForeignKey(EquipmentModel, on_delete=models.PROTECT, null=True)
-    reporter = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='reporter')
-    assigner = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='assigner')
-    job = models.ForeignKey(JobModel, on_delete=models.PROTECT, null=True, blank=True, related_name='job')
-    domain = models.ForeignKey(DomainModel, on_delete=models.PROTECT, null=True, blank=True, related_name='work_domain')
+    reporter = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='reporter_wo')
+    assigner = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='assigner_wo')
+    job = models.ForeignKey(JobModel, on_delete=models.PROTECT, null=True, blank=True, related_name='work_orders')
+    domain = models.ForeignKey(DomainModel, on_delete=models.PROTECT, null=True, blank=True, related_name='work_orders')
     creation_date = models.DateTimeField(auto_now_add=True)
     start_date = models.DateTimeField(null=True)
     end_date = models.DateTimeField(null=True)
@@ -34,9 +34,9 @@ class WorkOrderModel(models.Model):
 
 # WorkOrderStatus cette table fait le lien entre status et work
 class WorkOrderStatusModel(models.Model):
-    work_order = models.ForeignKey(WorkOrderModel, on_delete=models.CASCADE,related_name='work_order')
+    work_order = models.ForeignKey(WorkOrderModel, on_delete=models.CASCADE,related_name='work_order_status')
     event_date_time = models.DateTimeField(auto_now_add=True)
     status_before = models.ForeignKey(WorkStatusModel, on_delete=models.PROTECT,
-                                      null=True, related_name='status_before')
+                                      null=True, related_name='before_wo_status')
     status_after = models.ForeignKey(WorkStatusModel, on_delete=models.PROTECT,
-                                     null=True, related_name='status_after')
+                                     null=True, related_name='after_wo_status')
