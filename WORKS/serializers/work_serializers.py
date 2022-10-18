@@ -9,9 +9,15 @@ class WorkStatusSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
+    # les champs date sont ajoutés pour précider qu'ils sont null pour
+    # ..surcharger le fields all de la classe Meta
+    creation_date = serializers.DateTimeField(required=False)
+    start_date = serializers.DateTimeField(required=False)
+    end_date = serializers.DateTimeField(required=False)
     class Meta:
         model = WorkOrderModel
         fields = "__all__"
+
 
 
 class WorkOrderStatusSerializer(serializers.HyperlinkedModelSerializer):

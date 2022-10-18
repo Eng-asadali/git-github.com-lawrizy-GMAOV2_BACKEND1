@@ -15,18 +15,18 @@ class WorkStatusModel(models.Model):
 # Work order model: contient les tickets
 class WorkOrderModel(models.Model):
     title = models.CharField(max_length=255)
-    description = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000,null=True,blank=True)
     room = models.ForeignKey(RoomModel, on_delete=models.PROTECT, null=True, blank=False, related_name='work_order')
     job_type = models.ForeignKey(JobTypeModel, on_delete=models.PROTECT, null=True, blank=False, related_name='work_orders')
     status = models.ForeignKey(WorkStatusModel, on_delete=models.PROTECT, null=True)
     equipment = models.ForeignKey(EquipmentModel, on_delete=models.PROTECT, null=True)
     reporter = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='reporter_wo')
-    assigner = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='assigner_wo')
+    assignee = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='assignee_wo')
     job = models.ForeignKey(JobModel, on_delete=models.PROTECT, null=True, blank=True, related_name='work_orders')
     domain = models.ForeignKey(DomainModel, on_delete=models.PROTECT, null=True, blank=True, related_name='work_orders')
-    creation_date = models.DateTimeField(auto_now_add=True)
-    start_date = models.DateTimeField(null=True)
-    end_date = models.DateTimeField(null=True)
+    creation_date = models.DateTimeField(auto_now_add=True) # auto_now_add is used when we create the first time the object
+    start_date = models.DateTimeField(null=True,blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.title
