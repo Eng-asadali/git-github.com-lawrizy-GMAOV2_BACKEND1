@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-e+tfcq2z4f4!bqk-#q#tgldixi80c@p_51lg4q(=e$n!@v6ef_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost" ]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters', #library used to filter on get request
     'corsheaders',
     'ASSETS.apps.AssetsConfig',
     'WORKS.apps.WorksConfig',
@@ -56,6 +57,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'gmao.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 TEMPLATES = [
     {
