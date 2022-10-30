@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'django_filters', #library used to filter on get request
+    'django_filters',  # library used to filter on get request
+    'rest_framework.authtoken',  # library to use basic token authentication in DRF
     'corsheaders',
     'ASSETS.apps.AssetsConfig',
     'WORKS.apps.WorksConfig',

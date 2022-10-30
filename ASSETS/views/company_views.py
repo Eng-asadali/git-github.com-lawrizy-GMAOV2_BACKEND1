@@ -2,19 +2,22 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from ..models import Company
 from ..serializers import CompanySerializer
+from rest_framework.authentication import TokenAuthentication  # to use token authentication
+from rest_framework.permissions import IsAuthenticated
 
-from rest_framework.views import APIView # used to manage the upload company file
-from rest_framework.parsers import FormParser, MultiPartParser # pour gerer upload fichier
-from rest_framework.response import Response # utilise pour la reponse
-from rest_framework import status #utilise pour renvoyer le code reponse
-import csv # utilisé pour lire le fichier company upload
-
+from rest_framework.views import APIView  # used to manage the upload company file
+from rest_framework.parsers import FormParser, MultiPartParser  # pour gerer upload fichier
+from rest_framework.response import Response  # utilise pour la reponse
+from rest_framework import status  # utilise pour renvoyer le code reponse
+import csv  # utilisé pour lire le fichier company upload
 
 
 # Create your views here.
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]   # to force authentication
 
 
 # vue qui permet upload de societe
