@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-e+tfcq2z4f4!bqk-#q#tgldixi80c@p_51lg4q(=e$n!@v6ef_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "141.94.77.51"]
 
 
 # Application definition
@@ -136,11 +136,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-MEDIA_URL = 'media/' #utilisé pour upload image
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #utilisé pour indiquer où stocker le fichier uploadé
+MEDIA_URL = 'media/'  # utilisé pour upload image
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # utilisé pour indiquer où stocker le fichier uploadé
 
-STATIC_URL = 'static/' #utilisé pour les fichiers css js
-
+STATIC_URL = 'static/'  # used to store frontend
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')  # used for storing frontend angular files
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
