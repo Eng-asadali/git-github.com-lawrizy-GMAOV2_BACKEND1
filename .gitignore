@@ -15,3 +15,4 @@ WORKS/views/__pycache__/
 WORKS/models/__pycache__/
 WORKS/serializers/__pycache__/
 HR/__pycache__/
+HR/migrations/
