@@ -140,7 +140,12 @@ MEDIA_URL = 'media/'  # utilisé pour upload image
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # utilisé pour indiquer où stocker le fichier uploadé
 
 STATIC_URL = 'static/'  # used to store frontend
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')  # used for storing frontend angular files
+
+# on the server we create an environment variable with the directory for the static files
+if "GMAO_STATIC_ROOT" in os.environ:    #  we check if the environment variable exists (should in the server)
+    STATIC_ROOT = os.environ["GMAO_STATIC_ROOT"]    # should be /var/www/html/static/
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')  # should be called on locale machine
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
