@@ -1,4 +1,7 @@
 from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 from ..models import Facility
 from ..serializers import FacilitySerializer, CompanySerializer
 from rest_framework.response import Response
@@ -10,6 +13,8 @@ from rest_framework import status
 class FacilityViewset(viewsets.ModelViewSet):
     queryset = Facility.objects.all()
     serializer_class = FacilitySerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
     #parser_classes = [MultiPartParser,FormParser]
 
     # la methode update permet d'intercepter la request et voir le contenu avant le serializer

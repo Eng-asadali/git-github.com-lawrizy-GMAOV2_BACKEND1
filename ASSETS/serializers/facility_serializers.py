@@ -22,12 +22,14 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     # la methode create est appelle lors du serializer.save() au niveau
     # du FacilityViewset quand le serializer a été construit juste avec un param: request.data
     def create(self, validated_data):
-        print("Aziz validated_data: ", validated_data)
+        #print("Aziz validated_data: ", validated_data)
         company_id = validated_data["company"]["id"]
-        print("Aziz company_id: ", company_id)
-        print("Aziz validated_data.pop: ", validated_data.pop("company"))
+        #print("Aziz company_id: ", company_id)
+        #print("Aziz validated_data.pop: ", validated_data.pop("company"))
         company = Company.objects.get(pk=company_id)
+        #print("Aziz company.get: ",company)
         facility = Facility.objects.create(company=company, **validated_data)
+        #print("Aziz facility created: ",facility)
         return facility
 
     # la methode update est appelle lors du serializer.save() au niveau
