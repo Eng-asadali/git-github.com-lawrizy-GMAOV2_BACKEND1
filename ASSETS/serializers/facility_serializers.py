@@ -25,7 +25,11 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
         #print("Aziz validated_data: ", validated_data)
         company_id = validated_data["company"]["id"]
         #print("Aziz company_id: ", company_id)
-        #print("Aziz validated_data.pop: ", validated_data.pop("company"))
+
+        # dans la ligne suivante, on fait un pop car lors de la création du facility à la ligne 32
+        # on donne deja la company en premier parametre
+        # sinon il y aura de la redondance
+        print("Aziz validated_data.pop: ", validated_data.pop("company"))
         company = Company.objects.get(pk=company_id)
         #print("Aziz company.get: ",company)
         facility = Facility.objects.create(company=company, **validated_data)
