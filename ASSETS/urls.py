@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from .views import CompanyViewSet, UploadCompanyView, FacilityViewset, FloorViewSet, \
-    RoomViewset, EquipmentViewset, EquipmentFamilyViewset
+    RoomViewset, EquipmentViewset, EquipmentFamilyViewset, RoomTypeViewset
 from rest_framework import routers
 from  django.urls import path
 
@@ -23,11 +23,12 @@ router = routers.SimpleRouter()
 router.register(r'company', CompanyViewSet) # le r devant la chaine de caractère signifie raw, donc la chaine de
 # caractere doit être traitée de manière brut
 # sans gérer d'eventuels caractères d'echapement
-router.register(r'facility',FacilityViewset)
-router.register(r'floor',FloorViewSet)
+router.register(r'facility', FacilityViewset)
+router.register(r'floor', FloorViewSet)
 router.register(r'room', RoomViewset)
-router.register(r'equipment',EquipmentViewset)
+router.register(r'equipment', EquipmentViewset)
 router.register(r'equipment_family', EquipmentFamilyViewset)
+router.register(r'room_type', RoomTypeViewset)
 
 
 # pour les Apiview on utilise path

@@ -3,3 +3,5 @@ from .facility_models import *
 from .floor_models import *
 from .room_models import *
 from .equipment_models import *
+from .room_type_models import *
+
