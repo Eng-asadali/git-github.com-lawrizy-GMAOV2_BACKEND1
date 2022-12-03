@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from .views import CompanyViewSet, UploadCompanyView, FacilityViewset, FloorViewSet, \
-    RoomViewset, EquipmentViewset, EquipmentFamilyViewset, RoomTypeViewset, RoomTypeUploadView
+    RoomViewset, EquipmentViewset, EquipmentFamilyViewset, RoomTypeViewset, RoomTypeUploadView, RoomUploadView
 from rest_framework import routers
 from  django.urls import path
 
@@ -34,7 +34,8 @@ router.register(r'room_type', RoomTypeViewset)
 # pour les Apiview on utilise path
 urlpatterns = [
     path('uploadCompany/', UploadCompanyView.as_view()),  # used for csv file batch
-    path('room_type/room_type_upload/', RoomTypeUploadView.as_view())  # used to upload room type csv
+    path('room_type/room_type_upload/', RoomTypeUploadView.as_view()),  # used to upload room type csv
+    path('room/room_upload/', RoomUploadView.as_view())
 ]
 
 urlpatterns += router.urls
