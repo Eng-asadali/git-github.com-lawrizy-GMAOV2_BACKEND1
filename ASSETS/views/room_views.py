@@ -12,6 +12,8 @@ from rest_framework.response import Response
 class RoomViewset(viewsets.ModelViewSet):
     queryset = RoomModel.objects.all()
     serializer_class = RoomSerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
 
 
 # la vue RoomUploadView sert pour upload des batch de room au format csv
