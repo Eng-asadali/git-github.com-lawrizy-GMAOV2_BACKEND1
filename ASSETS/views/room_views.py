@@ -31,8 +31,9 @@ class RoomUploadView(APIView):
                 content = {'upload company file': 'bad csv file structure'}
                 return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)  # it means that the file is not good
             elif i != 0:  # exclude the header of the csv file
-                a_room_type = RoomTypeModel.objects.get(room_type=line[0])
-                a_floor = FloorModel.objects.get(floor=line[2])
+                #  print("AZIZ line content: ", line)
+                a_room_type = RoomTypeModel.objects.get(room_type=line[2])
+                a_floor = FloorModel.objects.get(floor=line[0])
                 a_room = RoomModel(room=line[1], room_type=a_room_type, floor=a_floor)
                 a_room.save()
                 # print("AZIZ upload done: ",line)
