@@ -40,7 +40,7 @@ class FloorUploadView(APIView):
                 return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)  # it means that the file is not good
             elif i != 0:  # exclude the header of the csv file
                 #  print("AZIZ line content: ", line)
-                a_facility = Facility.objects.get(floor=line[0])
+                a_facility = Facility.objects.get(facility_name=line[0])
                 a_floor = FloorModel(floor=line[1], facility=a_facility)
                 a_floor.save()
                 # print("AZIZ upload done: ",line)
