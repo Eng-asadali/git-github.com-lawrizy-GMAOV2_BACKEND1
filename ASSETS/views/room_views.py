@@ -26,7 +26,7 @@ class RoomUploadView(APIView):
         content = request.data['file']    # we get the file from the request
         content = content.read().decode("utf8").split('\n')     # for csv.reader(), we need to split a string by line
         lines = csv.reader(content, delimiter=',')
-        print("AZIZ lines in file: ", lines)
+        # print("AZIZ lines in file: ", lines)
         for line, i in zip(lines, range(len(content))):  # zip maps the 2 vectors per item -- i is used as counter
             if (i == 0) and ((line[0] != "floor") or (line[1] != "room")or (line[2] != "room_type")):
                 # print("Aziz proble upload: ", line)

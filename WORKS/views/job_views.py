@@ -16,7 +16,7 @@ class JobViewset(viewsets.ModelViewSet):
     #filterset_fieds = ('domain_id') #it is an array with the list of filter field
 
     def get_queryset(self):
-        print("Aziz request.query_params: ",self.request.query_params['domain_id'])
+        #print("Aziz request.query_params: ",self.request.query_params['domain_id'])
         queryset = JobModel.objects.all()
         return queryset
 

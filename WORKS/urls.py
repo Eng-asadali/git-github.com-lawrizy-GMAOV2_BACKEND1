@@ -1,5 +1,7 @@
 from rest_framework import routers
-from .views import DomainViewset, JobTypeViewset, JobViewset, WorkStatusViewset, WorkOrderViewset, WorkOrderStatusViewset
+from .views import DomainViewset, JobTypeViewset, JobViewset, WorkStatusViewset, WorkOrderViewset, \
+    WorkOrderStatusViewset, DomainUploadView
+from django.urls import path
 
 router = routers.SimpleRouter()
 router.register(r'domain', DomainViewset)
@@ -9,4 +11,9 @@ router.register(r'work_status', WorkStatusViewset)
 router.register(r'work_order', WorkOrderViewset)
 router.register(r'work_order_status', WorkOrderStatusViewset)
 
-urlpatterns = router.urls
+# pour les Apiview on utilise path
+urlpatterns = [
+    path('domain/domain_upload/', DomainUploadView.as_view()),  # used for csv file batch
+]
+
+urlpatterns += router.urls
