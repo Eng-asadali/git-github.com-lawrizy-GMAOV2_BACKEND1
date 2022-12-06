@@ -19,7 +19,7 @@ class WorkOrderModel(models.Model):
     room = models.ForeignKey(RoomModel, on_delete=models.PROTECT, null=True, blank=False, related_name='work_order')
     job_type = models.ForeignKey(JobTypeModel, on_delete=models.PROTECT, null=True, blank=False, related_name='work_orders')
     status = models.ForeignKey(WorkStatusModel, on_delete=models.PROTECT, null=True)
-    equipment = models.ForeignKey(EquipmentModel, on_delete=models.PROTECT, null=True)
+    equipment = models.ForeignKey(EquipmentModel, on_delete=models.PROTECT, null=True, blank=True)
     reporter = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='reporter_wo')
     assignee = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='assignee_wo')
     job = models.ForeignKey(JobModel, on_delete=models.PROTECT, null=True, blank=True, related_name='work_orders')
