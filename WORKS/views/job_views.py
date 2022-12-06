@@ -45,15 +45,16 @@ class JobUploadView(APIView):
         # print("AZIZ lines in file: ", lines)
         for line, i in zip(lines, range(len(content))):  # zip maps the 2 vectors per item -- i is used as counter
             if (i == 0) and ((line[0] != "job") or (line[1] != "domain") or (line[2] != "job_type")):
-                # print("Aziz proble upload: ", line)
+                # print("Aziz problem upload: ", line)
                 content = {'upload job file': 'bad csv file structure'}
                 return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)  # it means that the file is not good
             elif i != 0:  # exclude the header of the csv file
                 #  print("AZIZ line content: ", line)
                 a_job_type = JobTypeModel.objects.get(name=line[2])
+                print(f"Aziz domain dans fichier {line[1]} -- numero line: {i+1}")
                 a_domain = DomainModel.objects.get(name=line[1])
                 a_job = JobModel(job=line[0], domain_id=a_domain, job_type_id=a_job_type)
                 a_job.save()
-                # print("AZIZ upload done: ",line)
+            # print("AZIZ upload line numer done: ", i)
         content = {'upload job file': 'received and created'}
         return Response(content, status=status.HTTP_200_OK)
