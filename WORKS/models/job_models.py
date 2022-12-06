@@ -15,10 +15,10 @@ class JobModel(models.Model):
     """
     Job est pour l'intervention, exemple: entretien mensuel
     """
-    name = models.CharField(max_length=255, unique=True, null=False, blank=False)
-    description = models.TextField(blank=True)
-    job_type_id = models.ForeignKey(JobTypeModel, on_delete=models.PROTECT, null=False, related_name='job_type')
-    domain_id = models.ForeignKey(DomainModel, on_delete=models.PROTECT, null=False, related_name='domain')
+    job = models.CharField(max_length=255, unique=True, null=False, blank=False)
+    description = models.TextField(blank=True,null=True)
+    job_type_id = models.ForeignKey(JobTypeModel, on_delete=models.PROTECT, null=False, related_name='jobs')
+    domain_id = models.ForeignKey(DomainModel, on_delete=models.PROTECT, null=False, related_name='jobs')
 
     def __str__(self):
         return self.name

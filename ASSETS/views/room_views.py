@@ -30,7 +30,7 @@ class RoomUploadView(APIView):
         for line, i in zip(lines, range(len(content))):  # zip maps the 2 vectors per item -- i is used as counter
             if (i == 0) and ((line[0] != "floor") or (line[1] != "room")or (line[2] != "room_type")):
                 # print("Aziz proble upload: ", line)
-                content = {'upload company file': 'bad csv file structure'}
+                content = {'upload room file': 'bad csv file structure'}
                 return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)  # it means that the file is not good
             elif i != 0:  # exclude the header of the csv file
                 #  print("AZIZ line content: ", line)
