@@ -50,8 +50,8 @@ class JobUploadView(APIView):
                 return Response(content, status=status.HTTP_406_NOT_ACCEPTABLE)  # it means that the file is not good
             elif i != 0:  # exclude the header of the csv file
                 #  print("AZIZ line content: ", line)
-                a_job_type = JobTypeModel.objects.get(job_type=line[2])
-                a_domain = DomainModel.objects.get(floor=line[1])
+                a_job_type = JobTypeModel.objects.get(name=line[2])
+                a_domain = DomainModel.objects.get(name=line[1])
                 a_job = JobModel(job=line[0], domain_id=a_domain, job_type_id=a_job_type)
                 a_job.save()
                 # print("AZIZ upload done: ",line)
