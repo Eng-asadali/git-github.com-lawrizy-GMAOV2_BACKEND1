@@ -17,5 +17,5 @@ class RoomModel(models.Model):
         #  constraints = [models.UniqueConstraint(fields=['room', 'floor'], name='uniqueConst_1_room_per_floor')]
 
     def __str__(self):
-        content = self.room + " -- " + self.room_type
+        content = self.room + " -- " + self.room_type.room_type
         return content

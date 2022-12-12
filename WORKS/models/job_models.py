@@ -21,4 +21,4 @@ class JobModel(models.Model):
     domain_id = models.ForeignKey(DomainModel, on_delete=models.PROTECT, null=False, related_name='jobs')
 
     def __str__(self):
-        return self.name
+        return self.job

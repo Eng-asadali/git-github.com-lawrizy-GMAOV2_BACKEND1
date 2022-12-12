@@ -1,6 +1,6 @@
 from rest_framework import routers
 from .views import DomainViewset, JobTypeViewset, JobViewset, WorkStatusViewset, WorkOrderViewset, \
-    WorkOrderStatusViewset, DomainUploadView, JobUploadView
+    WorkOrderStatusViewset, DomainUploadView, JobUploadView, wo_and_status_and_rooms
 from django.urls import path
 
 router = routers.SimpleRouter()
@@ -15,6 +15,7 @@ router.register(r'work_order_status', WorkOrderStatusViewset)
 urlpatterns = [
     path('domain/domain_upload/', DomainUploadView.as_view()),  # used for csv file batch
     path('job/job_upload/', JobUploadView.as_view()),
+    path('work_order/wo_and_status_and_rooms/', wo_and_status_and_rooms),
 ]
 
 urlpatterns += router.urls
