@@ -1,8 +1,16 @@
 from rest_framework import serializers
 from .models import ProfileModel
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
+
+# on a besoin du GroupSerializer car il sera utilisé par le UserSerializer pour afficher les groupes associés à un user
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ('name',)
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    groups = GroupSerializer(many=True)
     class Meta:
         model = User
         fields = '__all__'
@@ -29,4 +37,5 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(source='user.password')
     class Meta:
         model = ProfileModel
-        fields = ["username", "email", "password","url"]
+        fields = ["username", "email", "password","url","groups"]
+
