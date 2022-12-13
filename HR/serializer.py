@@ -9,6 +9,7 @@ class GroupSerializer(serializers.ModelSerializer):
         fields = ('name',)
 
 
+# UserSerializer est utilisé pour afficher les users et leurs groupes associés
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     groups = GroupSerializer(many=True)
     class Meta:
@@ -31,6 +32,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         instance.save()
         return instance
 
+# ProfileSerializer n'est pas utilisé actuellement
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.CharField(source='user.username')
     email = serializers.CharField(source='user.email')
