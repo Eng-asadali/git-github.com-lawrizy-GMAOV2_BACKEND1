@@ -11,7 +11,7 @@ class GroupSerializer(serializers.ModelSerializer):
 
 # UserSerializer est utilisé pour afficher les users et leurs groupes associés
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    groups = GroupSerializer(many=True)
+    groups = GroupSerializer(many=True, required=False)
     class Meta:
         model = User
         fields = '__all__'
