@@ -21,7 +21,7 @@ class CurrentUserView(APIView):
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
     def get(self, request):
-        print(f"request: {request} -- request.user: {request.user}")
+        #print(f"request: {request} -- request.user: {request.user}")
         context = {'request': request}
         serializer = UserSerializer(request.user, context=context)
         return Response(serializer.data)
