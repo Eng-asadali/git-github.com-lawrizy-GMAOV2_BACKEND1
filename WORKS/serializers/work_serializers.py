@@ -28,6 +28,7 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
     status = WorkStatusSerializer(many=False, read_only=False)
     # room serializer pour récupérer le nom complet
     room = RoomSerializer(many=False, read_only=False)
+    assignee_read_only = serializers.CharField(source='assignee.username', read_only=True, required=False)
     class Meta:
         model = WorkOrderModel
         fields = "__all__"
