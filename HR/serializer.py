@@ -30,6 +30,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         # print("user: ", user)
         instance.set_password(raw_password=validated_data["password"])
         instance.save()
+        instance.username = validated_data["username"]
+        instance.save()
         return instance
 
 # ProfileSerializer n'est pas utilisé actuellement
