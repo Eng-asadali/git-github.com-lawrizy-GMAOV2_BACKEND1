@@ -7,6 +7,8 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.views import APIView
 import csv
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend # to filter the queryset
+from rest_framework import filters # to filter the queryset
 
 
 class RoomViewset(viewsets.ModelViewSet):
@@ -14,6 +16,8 @@ class RoomViewset(viewsets.ModelViewSet):
     serializer_class = RoomSerializer
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['floor', 'room_type']  # to filter by facility name or facility id
 
 
 # la vue RoomUploadView sert pour upload des batch de room au format csv
