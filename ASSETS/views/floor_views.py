@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from ..serializers import FloorSerializer
 from ..models import FloorModel, Facility
 from rest_framework.authentication import TokenAuthentication
@@ -7,11 +7,14 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.views import APIView
 import csv
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend # to filter the queryset
 
 
 class FloorViewSet(viewsets.ModelViewSet):
     queryset = FloorModel.objects.all()
     serializer_class = FloorSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter] # to filter the queryset
+    filterset_fields = ['facility__facility_name', 'facility'] # to filter by facility name or facility id
 
     # def partial_update(self, request, *args, **kwargs):
     #     serializer = FloorSerializer(self.get_object(),request.data,partial=True)
