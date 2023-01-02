@@ -25,29 +25,32 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
     start_date = serializers.DateTimeField(required=False)
     end_date = serializers.DateTimeField(required=False)
     #status : on rajoute le serializer pour pouvoir le nom du statut avec son nom dans liste des workorders
-    status = WorkStatusSerializer(many=False, read_only=False)
+    #status = WorkStatusSerializer(many=False, read_only=False)
+    status_read_only = serializers.CharField(source="status.name", read_only=True, required=False)
     # room serializer pour récupérer le nom complet
-    room = RoomSerializer(many=False, read_only=False)
+    #room = RoomSerializer(many=False, read_only=False)
+    room_read_only = serializers.CharField(source='room.room', read_only=True, required=False)
     # assignee_read_only is a read only field used to display the assignee in the list of workorders
     assignee_read_only = serializers.CharField(source='assignee.username', read_only=True, required=False)
     # facility_read_only is a read only field used to display the facility in the list of workorders
     facility_read_only = serializers.CharField(source='room.floor.facility.facility_name', read_only=True, required=False)
+    job_read_only = serializers.CharField(source='job.job', read_only=True, required=False)
     class Meta:
         model = WorkOrderModel
         fields = "__all__"
 
     # la methode doit être utilisée pour gérer l'objet status reçu lors de la création, car serializer imbriqué
-    def create(self, validated_data):
-        print("AZIZ validated_data: ", validated_data)
-        status = validated_data.pop('status')  # on doit extraire le status car il est envoyé en objet complet
-        status_id = status.pop("id")  # il faut faire pop pour extraire l'element dans ordered_dict
-        status_obj = WorkStatusModel.objects.get(pk=status_id)
-        room = validated_data.pop('room')
-        room_id = room.pop("id")
-        room_obj = RoomModel.objects.get(pk=room_id)
-        print(f"AZIZ room_obj: {room_obj}")
-        new_wo = WorkOrderModel.objects.create(**validated_data, status=status_obj, room=room_obj)
-        return new_wo
+    # def create(self, validated_data):
+    #     print("AZIZ validated_data: ", validated_data)
+    #     status = validated_data.pop('status')  # on doit extraire le status car il est envoyé en objet complet
+    #     status_id = status.pop("id")  # il faut faire pop pour extraire l'element dans ordered_dict
+    #     status_obj = WorkStatusModel.objects.get(pk=status_id)
+    #     room = validated_data.pop('room')
+    #     room_id = room.pop("id")
+    #     room_obj = RoomModel.objects.get(pk=room_id)
+    #     print(f"AZIZ room_obj: {room_obj}")
+    #     new_wo = WorkOrderModel.objects.create(**validated_data, status=status_obj, room=room_obj)
+    #     return new_wo
 
     # la methode update doit doit être utilisée pour gérer l'objet status reçu lors de la création, car serializer imbriqué
     def update(self, instance, validated_data):
