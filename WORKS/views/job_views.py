@@ -1,5 +1,7 @@
+from django_filters.rest_framework import DjangoFilterBackend
+
 from ..models import JobTypeModel, JobModel, DomainModel
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from ..serializers import JobTypeSerializer, JobSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -21,8 +23,8 @@ class JobViewset(viewsets.ModelViewSet):
     serializer_class = JobSerializer
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
-    #filter_backends = [DjangoFilterBackend] # permet de faire du generic filtering avec la library django-filter
-    #filterset_fieds = ('domain_id') #it is an array with the list of filter field
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['domain_id', 'job_type_id']  # to filter by facility name or facility id
 
     def get_queryset(self):
         #print("Aziz request.query_params: ",self.request.query_params['domain_id'])
