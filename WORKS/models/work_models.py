@@ -7,9 +7,16 @@ from django.contrib.auth.models import User
 # WorkStatusModel contiendra les status: todo, in_progress,closed
 class WorkStatusModel(models.Model):
     name = models.CharField(max_length=255)
+    position = models.IntegerField(blank=False, null=False, unique=False)
 
     def __str__(self):
         return self.name
+
+    # add indexes for all the fields
+    class Meta:
+        indexes = [
+            models.Index(fields=['name', 'position']),
+        ]
 
 
 # Work order model: contient les tickets
@@ -31,6 +38,14 @@ class WorkOrderModel(models.Model):
     def __str__(self):
         return self.title
 
+    #make indexes for all the fields
+    class Meta:
+        indexes = [
+            models.Index(fields=['title', 'description', 'room', 'job_type', 'status', 'equipment', 'reporter',
+                                 'assignee', 'job', 'domain', 'creation_date', 'start_date', 'end_date'],
+                         name='work_order_idx'),
+        ]
+
 
 # WorkOrderStatus cette table fait le lien entre status et work
 class WorkOrderStatusModel(models.Model):
@@ -40,3 +55,9 @@ class WorkOrderStatusModel(models.Model):
                                       null=True, related_name='before_wo_status')
     status_after = models.ForeignKey(WorkStatusModel, on_delete=models.PROTECT,
                                      null=True, related_name='after_wo_status')
+
+    # make indexes for all the fields
+    class Meta:
+        indexes = [
+            models.Index(fields=['work_order', 'event_date_time', 'status_before', 'status_after']),
+        ]

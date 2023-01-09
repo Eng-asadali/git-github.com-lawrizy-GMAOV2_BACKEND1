@@ -21,4 +21,8 @@ class EquipmentModel(models.Model):
     def __str__(self):
         return self.name
 
-
+    # make indexes for all the fields except description
+    class Meta:
+        indexes = [
+            models.Index(fields=['name', 'parent_id', 'room_id', 'family_id']),
+        ]

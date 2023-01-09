@@ -12,7 +12,7 @@ class RoomModel(models.Model):
 
     class Meta:
         indexes = [
-            models.Index(fields=['room']),
+            models.Index(fields=['room', 'floor', 'room_type']),
         ]
         #  constraints = [models.UniqueConstraint(fields=['room', 'floor'], name='uniqueConst_1_room_per_floor')]
 
