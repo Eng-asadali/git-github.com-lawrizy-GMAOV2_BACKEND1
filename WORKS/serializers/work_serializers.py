@@ -55,20 +55,29 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
     # la methode update doit doit être utilisée pour gérer l'objet status reçu lors de la création, car serializer imbriqué
     def update(self, instance, validated_data):
         # print(f"AZIZ instance: {type(instance)}")
-        print(f"AZIZ validate data: {validated_data}")
-        wo_id = validated_data["id"]  #  on pourrait utilisé le parametre instance
+        #print(f"AZIZ update wo - validate data: {validated_data}")
+        # wo_id = validated_data["id"]  #  on pourrait utilisé le parametre instance
         # print(f"AZIZ wo_id: {wo_id}")
-        status = validated_data.pop('status')
-        status_id = status.pop("id")  # il faut faire pop pour extraire l'element dans ordered_dict
-        status_obj = WorkStatusModel.objects.get(pk=status_id)
-        room = validated_data.pop('room')
-        room_id = room.pop("id")
-        room_obj = RoomModel.objects.get(pk=room_id)
+        # status = validated_data.pop('status')
+        # status_id = status.pop("id")  # il faut faire pop pour extraire l'element dans ordered_dict
+        # status_obj = WorkStatusModel.objects.get(pk=status_id)
+        # room = validated_data.pop('room')
+        # room_id = room.pop("id")
+        # room_obj = RoomModel.objects.get(pk=room_id)
         # print(f"AZIZ status_obj: {status_obj}")
         #  on met à jour le work order
-        WorkOrderModel.objects.filter(pk=wo_id).update(**validated_data, status=status_obj, room=room_obj)
-        updated_wo = WorkOrderModel.objects.get(pk=wo_id)
-        return updated_wo
+        # WorkOrderModel.objects.filter(pk=wo_id).update(**validated_data)#, status=status_obj, room=room_obj)
+        # updated_wo = WorkOrderModel.objects.get(pk=wo_id)
+        # return updated_wo
+
+        # we suppose that we update only the status and the assignee
+        # update the instance with the validated data save it and return it
+        instance.assignee = validated_data.get('assignee', instance.assignee)
+        instance.status = validated_data.get('status', instance.status)
+        instance.save()
+        return instance
+
+
 
 
 class WorkOrderStatusSerializer(serializers.HyperlinkedModelSerializer):
