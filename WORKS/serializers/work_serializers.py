@@ -54,7 +54,7 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
 
     # la methode update doit doit être utilisée pour gérer l'objet status reçu lors de la création, car serializer imbriqué
     def update(self, instance, validated_data):
-        # print(f"AZIZ instance: {type(instance)}")
+        print(f"AZIZ - update - validated_data: {validated_data}")
         #print(f"AZIZ update wo - validate data: {validated_data}")
         # wo_id = validated_data["id"]  #  on pourrait utilisé le parametre instance
         # print(f"AZIZ wo_id: {wo_id}")
@@ -72,8 +72,19 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
 
         # we suppose that we update only the status and the assignee
         # update the instance with the validated data save it and return it
-        instance.assignee = validated_data.get('assignee', instance.assignee)
-        instance.status = validated_data.get('status', instance.status)
+        instance.assignee = validated_data.get('assignee', instance.assignee) # retrieve the value of the 'assignee'
+        # key in the validated_data dictionary, and if the key is not present, it returns the current value of the
+        # instance.assignee attribute.
+
+        # we check if the status received is different from the current status
+        if instance.status != validated_data.get('status', instance.status):
+            # we create a new record in the WorkOrderStatusModel
+            new_status = validated_data.get('status', instance.status)
+            # record the event in the WorkOrderStatusModel
+            WorkOrderStatusModel.objects.create(status_before=instance.status, status_after=new_status,
+                                                work_order=instance)
+            # update the status of the work order
+            instance.status = validated_data.get('status', instance.status)
         instance.save()
         return instance
 

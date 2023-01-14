@@ -61,3 +61,7 @@ class WorkOrderStatusModel(models.Model):
         indexes = [
             models.Index(fields=['work_order', 'event_date_time', 'status_before', 'status_after']),
         ]
+
+    def __str__(self):
+        result = f"{self.work_order} -- {self.event_date_time} -- {self.status_before} -- {self.status_after}"
+        return self.work_order.title
