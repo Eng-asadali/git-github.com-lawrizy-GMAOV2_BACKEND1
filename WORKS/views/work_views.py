@@ -5,9 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from ..models.work_models import WorkStatusModel, WorkOrderModel, WorkOrderStatusModel
 from ..serializers.work_serializers import WorkStatusSerializer, WorkOrderSerializer, WorkOrderStatusSerializer
-from ASSETS.models import RoomModel
-from ASSETS.serializers import RoomSerializer
-from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend  # to filter the queryset
+from rest_framework import filters  # to filter the queryset
 
 
 class WorkStatusViewset(viewsets.ModelViewSet):
@@ -27,6 +26,10 @@ class WorkOrderViewset(viewsets.ModelViewSet):
 class WorkOrderStatusViewset(viewsets.ModelViewSet):
     queryset = WorkOrderStatusModel.objects.all()
     serializer_class = WorkOrderStatusSerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['work_order']  # to filter by work_order
 
 # this view will be used to get all the data from the 3 models
 # to have 

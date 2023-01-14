@@ -89,9 +89,12 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
         return instance
 
 
-
-
 class WorkOrderStatusSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=False, required=False)  # on met le champs pour forcer l'affichage
+    work_order_id_read_only = serializers.CharField(source='work_order.id', read_only=True, required=False)
+    status_before_read_only = serializers.CharField(source='status_before.name', read_only=True, required=False)
+    status_after_read_only = serializers.CharField(source='status_after.name', read_only=True, required=False)
+
     class Meta:
         model = WorkOrderStatusModel
         fields = "__all__"

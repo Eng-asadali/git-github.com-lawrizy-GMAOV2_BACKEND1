@@ -64,4 +64,4 @@ class WorkOrderStatusModel(models.Model):
 
     def __str__(self):
         result = f"{self.work_order} -- {self.event_date_time} -- {self.status_before} -- {self.status_after}"
-        return self.work_order.title
+        return result
