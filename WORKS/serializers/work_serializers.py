@@ -31,6 +31,7 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
     #room = RoomSerializer(many=False, read_only=False)
     room_read_only = serializers.CharField(source='room.room', read_only=True, required=False)
     # assignee_read_only is a read only field used to display the assignee in the list of workorders
+    reporter_read_only = serializers.CharField(source='reporter.username', read_only=True, required=False)
     assignee_read_only = serializers.CharField(source='assignee.username', read_only=True, required=False)
     # facility_read_only is a read only field used to display the facility in the list of workorders
     facility_read_only = serializers.CharField(source='room.floor.facility.facility_name', read_only=True, required=False)
