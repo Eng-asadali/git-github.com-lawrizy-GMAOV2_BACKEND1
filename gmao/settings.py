@@ -122,6 +122,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://www.hazard.gmao.app",
     'http://localhost:8100',  # ionic serve
     'http://localhost',  # ionic serve
+    'capacitor://localhost',  # ionic capacitor for ios
 ]
 
 
