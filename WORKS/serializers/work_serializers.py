@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models.work_models import WorkStatusModel, WorkOrderStatusModel, WorkOrderModel
+from ..models.work_models import WorkStatusModel, WorkOrderStatusModel, WorkOrderModel, WorkOrderPictureModel
 from ASSETS.serializers.room_serializers import RoomSerializer
 from ASSETS.models.room_models import RoomModel
 
@@ -98,5 +98,14 @@ class WorkOrderStatusSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = WorkOrderStatusModel
+        fields = "__all__"
+
+
+#a serializer for the WorkOrderPictureModel that is used to upload pictures
+class WorkOrderPictureSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=False, required=False)  # on met le champs pour forcer l'affichage
+    work_order_id_read_only = serializers.CharField(source='work_order.id', read_only=True, required=False)
+    class Meta:
+        model = WorkOrderPictureModel
         fields = "__all__"
 

@@ -2,9 +2,11 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 
-from ..models.work_models import WorkStatusModel, WorkOrderModel, WorkOrderStatusModel
-from ..serializers.work_serializers import WorkStatusSerializer, WorkOrderSerializer, WorkOrderStatusSerializer
+from ..models.work_models import WorkStatusModel, WorkOrderModel, WorkOrderStatusModel, WorkOrderPictureModel
+from ..serializers.work_serializers import WorkStatusSerializer, WorkOrderSerializer, WorkOrderStatusSerializer, \
+    WorkOrderPictureSerializer
 from django_filters.rest_framework import DjangoFilterBackend  # to filter the queryset
 from rest_framework import filters  # to filter the queryset
 
@@ -45,3 +47,15 @@ class WorkOrderStatusViewset(viewsets.ModelViewSet):
 #         data = room_serializer.data + wo_serializer.data
 #         data = {"wo": wo_serializer.data, "rooms": room_serializer.data}
 #         return Response(data)
+
+# I need a view that will be used to upload an image
+
+
+class WorkOrderPictureViewset(viewsets.ModelViewSet):
+    queryset = WorkOrderPictureModel.objects.all()
+    serializer_class = WorkOrderPictureSerializer
+    parser_classes = (MultiPartParser, FormParser, FileUploadParser)  # to upload a file
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['work_order']  # to filter by work_order

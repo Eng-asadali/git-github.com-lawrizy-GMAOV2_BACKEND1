@@ -36,7 +36,9 @@ class WorkOrderModel(models.Model):
     end_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        # convert id to string
+
+        return str(self.id)
 
     #make indexes for all the fields
     class Meta:
@@ -64,4 +66,19 @@ class WorkOrderStatusModel(models.Model):
 
     def __str__(self):
         result = f"{self.work_order} -- {self.event_date_time} -- {self.status_before} -- {self.status_after}"
+        return result
+
+
+class WorkOrderPictureModel(models.Model):
+    work_order = models.ForeignKey(WorkOrderModel, on_delete=models.CASCADE, related_name='work_order_pictures')
+    picture = models.ImageField(upload_to='work_order_pictures', null=True, blank=True)
+
+    # make indexes for all the fields
+    class Meta:
+        indexes = [
+            models.Index(fields=['work_order', 'picture']),
+        ]
+
+    def __str__(self):
+        result = f"{self.work_order} -- {self.picture}"
         return result
