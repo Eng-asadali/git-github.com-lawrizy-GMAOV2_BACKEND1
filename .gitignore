@@ -17,3 +17,4 @@ WORKS/serializers/__pycache__/
 HR/__pycache__/
 HR/migrations/
 .DS_Store
+media/
