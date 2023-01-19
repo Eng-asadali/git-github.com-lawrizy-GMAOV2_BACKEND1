@@ -1,7 +1,13 @@
+from django.core.files import File
+from django.core.files.storage import default_storage
 from django.db import models
 from ASSETS.models import RoomModel, EquipmentModel
 from .job_models import JobTypeModel, JobModel, DomainModel
 from django.contrib.auth.models import User
+from PIL import Image  # used for image resizing
+from django.db.models.signals import pre_save  # used to resize image before saving
+from django.dispatch import receiver  # used to resize image before saving
+from io import BytesIO  # used to resize image before saving
 
 
 # WorkStatusModel contiendra les status: todo, in_progress,closed
@@ -69,9 +75,16 @@ class WorkOrderStatusModel(models.Model):
         return result
 
 
+# work_order_picture_path is used to generate the path and the name of the picture file (wo_xx.jpg) --
+# it is used in the WorkOrderPictureModel.picture field
+def work_order_picture_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/work_order_pictures/work_order_<id>.jpg
+    return 'work_order_pictures/wo_{0}.jpg'.format(instance.work_order.id)
+
+
 class WorkOrderPictureModel(models.Model):
     work_order = models.ForeignKey(WorkOrderModel, on_delete=models.CASCADE, related_name='work_order_pictures')
-    picture = models.ImageField(upload_to='work_order_pictures', null=True, blank=True)
+    picture = models.ImageField(upload_to=work_order_picture_path, null=True, blank=True)  # upload_to uses the helper above
 
     # make indexes for all the fields
     class Meta:
@@ -82,3 +95,31 @@ class WorkOrderPictureModel(models.Model):
     def __str__(self):
         result = f"{self.work_order} -- {self.picture}"
         return result
+
+    # the save method is overriden to resize the image before saving it and to delete the old image
+    # -- to limit to 1 image per work order
+    def save(self, *args, **kwargs):
+        try:
+            old_picture = WorkOrderPictureModel.objects.get(work_order=self.work_order)
+            # Delete the old image file
+            default_storage.delete(old_picture.picture.path)
+            old_picture.delete()
+        except WorkOrderPictureModel.DoesNotExist:
+            pass
+        # Open image
+        img = Image.open(self.picture)
+
+        # Resize image
+        MAX_SIZE = (640, 640)
+        img.thumbnail(MAX_SIZE)
+
+        # Save image
+        MAX_SIZE_BYTES = 1 * 1024 * 1024  #  1 MB
+        quality = 100
+        while self.picture.size > MAX_SIZE_BYTES:
+            img.save(self.picture.path, format='JPEG', quality=quality)
+            quality -= 5
+            if quality <= 0:
+                raise ValueError("Cannot reduce file size.")
+
+        super(WorkOrderPictureModel, self).save(*args, **kwargs)
