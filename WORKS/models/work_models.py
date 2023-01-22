@@ -116,10 +116,22 @@ class WorkOrderPictureModel(models.Model):
         # Save image
         MAX_SIZE_BYTES = 1 * 1024 * 1024  #  1 MB
         quality = 100
-        while self.picture.size > MAX_SIZE_BYTES:
-            img.save(self.picture.path, format='JPEG', quality=quality)
-            quality -= 5
-            if quality <= 0:
-                raise ValueError("Cannot reduce file size.")
+        if self.picture.size > MAX_SIZE_BYTES:
+            while self.picture.size > MAX_SIZE_BYTES:
+                quality -= 5
+                img.save(self.picture.path, format='JPEG', quality=quality)
+                # Update picture attribute with new image data
+                with open(self.picture.path, 'rb') as f:
+                    new_picture = File(f)
+                    self.picture = new_picture
 
-        super(WorkOrderPictureModel, self).save(*args, **kwargs)
+                print(f"AZIZ picture reduce: quality: {quality} -- size: {self.picture.size}")
+                if quality <= 0:
+                    raise ValueError("Cannot reduce file size.")
+            with default_storage.open(self.picture.path, 'rb') as f: # open the file because it was
+                # closed in the while loop and the super.save() will fail
+                new_picture = File(f)
+                self.picture = new_picture
+                super(WorkOrderPictureModel, self).save(*args, **kwargs)
+        else:
+            super(WorkOrderPictureModel, self).save(*args, **kwargs)

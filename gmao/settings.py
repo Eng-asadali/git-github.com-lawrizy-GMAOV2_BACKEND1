@@ -142,7 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 MEDIA_URL = 'media/'  # utilisé pour upload image
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # utilisé pour indiquer où stocker le fichier uploadé
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # utilisé pour indiquer où stocker le fichier uploadé
 
 STATIC_URL = 'static/'  # used to store frontend
 
