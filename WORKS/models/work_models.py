@@ -5,9 +5,7 @@ from ASSETS.models import RoomModel, EquipmentModel
 from .job_models import JobTypeModel, JobModel, DomainModel
 from django.contrib.auth.models import User
 from PIL import Image  # used for image resizing
-from django.db.models.signals import pre_save  # used to resize image before saving
-from django.dispatch import receiver  # used to resize image before saving
-from io import BytesIO  # used to resize image before saving
+import uuid
 
 
 # WorkStatusModel contiendra les status: todo, in_progress,closed
@@ -79,7 +77,9 @@ class WorkOrderStatusModel(models.Model):
 # it is used in the WorkOrderPictureModel.picture field
 def work_order_picture_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/work_order_pictures/work_order_<id>.jpg
-    return 'work_order_pictures/wo_{0}.jpg'.format(instance.work_order.id)
+    # add at the end a uuid to make sure the file name is unique (pour eviter que le cache du browser ne garde l'ancienne image)
+    unique_id = uuid.uuid4().hex
+    return 'work_order_pictures/wo_{0}_{1}.jpg'.format(instance.work_order.id,unique_id)
 
 
 class WorkOrderPictureModel(models.Model):

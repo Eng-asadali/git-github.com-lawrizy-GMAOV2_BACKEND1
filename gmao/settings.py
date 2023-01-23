@@ -142,7 +142,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 MEDIA_URL = 'media/'  # utilisé pour upload image
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # utilisé pour indiquer où stocker le fichier uploadé
+# on the server we create an environment variable with the directory for the media uploaded files
+if "GMAO_MEDIA_ROOT" in os.environ:    #  we check if the environment variable exists (should in the server)
+    MEDIA_ROOT = os.environ["GMAO_MEDIA_ROOT"]    # should be /var/www/html/static/media/
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # localmachine: utilisé pour indiquer où stocker les images uploadé
 
 STATIC_URL = 'static/'  # used to store frontend
 
