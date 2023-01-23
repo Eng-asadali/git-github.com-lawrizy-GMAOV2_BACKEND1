@@ -84,7 +84,7 @@ def work_order_picture_path(instance, filename):
 
 class WorkOrderPictureModel(models.Model):
     work_order = models.ForeignKey(WorkOrderModel, on_delete=models.CASCADE, related_name='work_order_pictures')
-    picture = models.ImageField(upload_to=work_order_picture_path, null=True, blank=True)  # upload_to uses the helper above
+    picture = models.ImageField(null=True, blank=True)  # upload_to uses the helper above
 
     # make indexes for all the fields
     class Meta:
@@ -98,43 +98,43 @@ class WorkOrderPictureModel(models.Model):
 
     # the save method is overriden to resize the image before saving it and to delete the old image
     # -- to limit to 1 image per work order
-    def save(self, *args, **kwargs):
-        print("AZIZ start save picture")
-        try:
-            old_picture = WorkOrderPictureModel.objects.get(work_order=self.work_order)
-            # Delete the old image file
-            default_storage.delete(old_picture.picture.path)
-            old_picture.delete()
-        except WorkOrderPictureModel.DoesNotExist:
-            pass
-        # Open image
-        img = Image.open(self.picture)
-
-        # Resize image
-        MAX_SIZE = (640, 640)
-        img.thumbnail(MAX_SIZE)
-
-        # Save image
-        MAX_SIZE_BYTES = 1 * 1024 * 1024  #  1 MB
-        quality = 100
-        if self.picture.size > MAX_SIZE_BYTES:
-            while self.picture.size > MAX_SIZE_BYTES:
-                quality -= 5
-                img.save(self.picture.path, format='JPEG', quality=quality)
-                # Update picture attribute with new image data
-                with open(self.picture.path, 'rb') as f:
-                    new_picture = File(f)
-                    self.picture = new_picture
-
-                print(f"AZIZ picture reduce: quality: {quality} -- size: {self.picture.size}")
-                if quality <= 0:
-                    raise ValueError("Cannot reduce file size.")
-            with default_storage.open(self.picture.path, 'rb') as f: # open the file because it was
-                # closed in the while loop and the super.save() will fail
-                new_picture = File(f)
-                self.picture = new_picture
-                super(WorkOrderPictureModel, self).save(*args, **kwargs)
-                print(f"AZIZ picture saved with quality change")
-        else:
-            super(WorkOrderPictureModel, self).save(*args, **kwargs)
-            print(f"AZIZ picture saved")
+    # def save(self, *args, **kwargs):
+    #     print("AZIZ start save picture")
+    #     try:
+    #         old_picture = WorkOrderPictureModel.objects.get(work_order=self.work_order)
+    #         # Delete the old image file
+    #         default_storage.delete(old_picture.picture.path)
+    #         old_picture.delete()
+    #     except WorkOrderPictureModel.DoesNotExist:
+    #         pass
+    #     # Open image
+    #     img = Image.open(self.picture)
+    #
+    #     # Resize image
+    #     MAX_SIZE = (640, 640)
+    #     img.thumbnail(MAX_SIZE)
+    #
+    #     # Save image
+    #     MAX_SIZE_BYTES = 1 * 1024 * 1024  #  1 MB
+    #     quality = 100
+    #     if self.picture.size > MAX_SIZE_BYTES:
+    #         while self.picture.size > MAX_SIZE_BYTES:
+    #             quality -= 5
+    #             img.save(self.picture.path, format='JPEG', quality=quality)
+    #             # Update picture attribute with new image data
+    #             with open(self.picture.path, 'rb') as f:
+    #                 new_picture = File(f)
+    #                 self.picture = new_picture
+    #
+    #             print(f"AZIZ picture reduce: quality: {quality} -- size: {self.picture.size}")
+    #             if quality <= 0:
+    #                 raise ValueError("Cannot reduce file size.")
+    #         with default_storage.open(self.picture.path, 'rb') as f: # open the file because it was
+    #             # closed in the while loop and the super.save() will fail
+    #             new_picture = File(f)
+    #             self.picture = new_picture
+    #             super(WorkOrderPictureModel, self).save(*args, **kwargs)
+    #             print(f"AZIZ picture saved with quality change")
+    #     else:
+    #         super(WorkOrderPictureModel, self).save(*args, **kwargs)
+    #         print(f"AZIZ picture saved")
