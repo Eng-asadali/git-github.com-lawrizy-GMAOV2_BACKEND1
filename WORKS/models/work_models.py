@@ -99,6 +99,7 @@ class WorkOrderPictureModel(models.Model):
     # the save method is overriden to resize the image before saving it and to delete the old image
     # -- to limit to 1 image per work order
     def save(self, *args, **kwargs):
+        print("AZIZ start save picture")
         try:
             old_picture = WorkOrderPictureModel.objects.get(work_order=self.work_order)
             # Delete the old image file
@@ -133,5 +134,7 @@ class WorkOrderPictureModel(models.Model):
                 new_picture = File(f)
                 self.picture = new_picture
                 super(WorkOrderPictureModel, self).save(*args, **kwargs)
+                print(f"AZIZ picture saved with quality change")
         else:
             super(WorkOrderPictureModel, self).save(*args, **kwargs)
+            print(f"AZIZ picture saved")
