@@ -1,0 +1,6 @@
+# Aziz: ce fichier est utilisé par le service définit dans systemd
+# Aziz:  environment variable used by django.settings to set STATIC_ROOT
+GMAO_STATIC_ROOT="/var/www/html/static/"
+
+#Aziz: env variable utilisée dans django.settings  pour MEDIA_ROOT
+GMAO_MEDIA_ROOT="/var/www/html/static/media/"
