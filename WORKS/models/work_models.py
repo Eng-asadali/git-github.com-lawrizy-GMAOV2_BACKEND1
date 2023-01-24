@@ -83,10 +83,10 @@ def work_order_picture_path(instance, filename):
     relative_name = 'work_order_pictures/wo_{0}_{1}.jpg'.format(instance.work_order.id,unique_id)
     return relative_name
 
-media_storage= FileSystemStorage(location=settings.MEDIA_ROOT)
+
 class WorkOrderPictureModel(models.Model):
     work_order = models.ForeignKey(WorkOrderModel, on_delete=models.CASCADE, related_name='work_order_pictures')
-    picture = models.ImageField(storage=media_storage, upload_to=work_order_picture_path, null=True, blank=True)  # upload_to uses the helper above
+    picture = models.ImageField(upload_to=work_order_picture_path, null=True, blank=True)  # upload_to uses the helper above
 
     # make indexes for all the fields
     class Meta:
