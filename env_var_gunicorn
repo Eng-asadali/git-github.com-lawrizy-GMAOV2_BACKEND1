@@ -4,3 +4,7 @@ GMAO_STATIC_ROOT="/var/www/html/static/"
 
 #Aziz: env variable utilisée dans django.settings  pour MEDIA_ROOT
 GMAO_MEDIA_ROOT="/var/www/html/static/media/"
+
+#AZIZ: env variable pour email
+GMAO_ENV="PRODUCTION"
+GMAO_EMAIL_HOST_USER="no_reply@hazard.gmao.app"
