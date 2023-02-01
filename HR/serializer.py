@@ -12,6 +12,8 @@ class GroupSerializer(serializers.ModelSerializer):
 # UserSerializer est utilisé pour afficher les users et leurs groupes associés
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     groups = GroupSerializer(many=True, required=False)
+    #add password field to make it not required
+    password = serializers.CharField(write_only=True, required=False, allow_blank=True)
     class Meta:
         model = User
         fields = '__all__'
@@ -23,16 +25,20 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user.save()
         return user
 
-    #implementé de manière à mettre uniquement le password à jour
+    #implementé de manière à mettre uniquement le password et email  et username à jour
     def update(self, instance, validated_data):
         # print("instance: ", type(instance))
         # user = User.objects.get(username=instance)
-        # print("user: ", user)
-        instance.set_password(raw_password=validated_data["password"])
-        instance.save()
+        #print("AZIZ update user: ", instance.username)
+        if ("password" in validated_data) and (validated_data["password"] != ""):
+            instance.set_password(raw_password=validated_data["password"])
+            instance.save()
         instance.username = validated_data["username"]
+        instance.email = validated_data["email"]    # to update the email
         instance.save()
+        #print("AZIZ update user DONE")
         return instance
+
 
 # ProfileSerializer n'est pas utilisé actuellement
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):

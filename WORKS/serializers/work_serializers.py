@@ -1,7 +1,11 @@
 from rest_framework import serializers
+
+from django.conf import settings
+
 from ..models.work_models import WorkStatusModel, WorkOrderStatusModel, WorkOrderModel, WorkOrderPictureModel
 from ASSETS.serializers.room_serializers import RoomSerializer
 from ASSETS.models.room_models import RoomModel
+from django.core.mail import send_mail
 
 
 class WorkStatusSerializer(serializers.HyperlinkedModelSerializer):
@@ -87,6 +91,20 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
             # update the status of the work order
             instance.status = validated_data.get('status', instance.status)
         instance.save()
+
+        # we send email to the assignee
+        # we get the assignee email
+        email_to = instance.assignee.email
+        email_subject = f"Ordre de travail {instance.id} mis à jour"
+        email_body = f"Numéro ordre travail: {instance.id}\nResponsable: {instance.assignee.username},\n" \
+                     f"Nouveau status: {instance.status}\n"
+        email_from = settings.EMAIL_HOST_USER
+        send_mail(
+            email_subject,
+            email_body,
+            email_from,
+            [email_to],
+        )
         return instance
 
 

@@ -23,6 +23,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
+    #show the profile
     instance.profile.save()
 
 # methode used to automatically add a token when you create a user

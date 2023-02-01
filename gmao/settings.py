@@ -159,3 +159,17 @@ else:
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# email configuration
+# set the email backend depending on the environment
+if "GMAO_ENV" in os.environ:
+    if os.environ["GMAO_ENV"] == "PRODUCTION":
+        EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # used for production server
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # used for local machine
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+if "GMAO_EMAIL_HOST_USER" in os.environ:
+    EMAIL_HOST_USER = os.environ["GMAO_EMAIL_HOST_USER"]
+else:
+    EMAIL_HOST_USER = 'aziz.lawrizy@gmao.app'
