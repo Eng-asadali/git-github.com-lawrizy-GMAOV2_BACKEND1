@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from django.conf import settings
@@ -106,6 +107,32 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
             [email_to],
         )
         return instance
+    # add a method to override the create method: to send an email to the assignee, the reporter and the users of the admin group
+    def create(self, validated_data):
+        # we create the work order
+        new_wo = WorkOrderModel.objects.create(**validated_data)
+        # create an array of emails of the users of the admin group
+        emails_to = []
+        for user in User.objects.filter(groups__name='admin'):
+            emails_to.append(user.email)
+        # check if the reporter email and the assignee email exists and add to the array
+        if new_wo.reporter is not None:
+            emails_to.append(new_wo.reporter.email)
+        if new_wo.assignee is not None:
+            emails_to.append(new_wo.assignee.email)
+        # we send the email
+        email_subject = f"Nouvel ordre de travail {new_wo.id}"
+        email_body = f"Numéro ordre travail: {new_wo.id}\nRapporteur: {new_wo.reporter.username},\n" \
+                     f"Status: {new_wo.status}\nLocal: {new_wo.room.room},\n" \
+                     f"Intervention: {new_wo.job.job},\n"
+        email_from = settings.EMAIL_HOST_USER
+        send_mail(
+            email_subject,
+            email_body,
+            email_from,
+            [emails_to],
+        )
+        return new_wo
 
 
 class WorkOrderStatusSerializer(serializers.HyperlinkedModelSerializer):
