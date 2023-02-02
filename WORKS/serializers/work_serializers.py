@@ -130,7 +130,7 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
             email_subject,
             email_body,
             email_from,
-            [emails_to],
+            emails_to,
         )
         return new_wo
 
