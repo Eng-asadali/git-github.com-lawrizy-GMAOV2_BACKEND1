@@ -54,7 +54,7 @@ class WorkOrderModel(models.Model):
         ]
 
 
-# WorkOrderStatus cette table fait le lien entre status et work
+# WorkOrderStatus cette table fait le lien entre status et work. Elle est utilisé pour garder l'historique des status
 class WorkOrderStatusModel(models.Model):
     work_order = models.ForeignKey(WorkOrderModel, on_delete=models.CASCADE,related_name='work_order_status')
     event_date_time = models.DateTimeField(auto_now_add=True)
@@ -62,6 +62,8 @@ class WorkOrderStatusModel(models.Model):
                                       null=True, related_name='before_wo_status')
     status_after = models.ForeignKey(WorkStatusModel, on_delete=models.PROTECT,
                                      null=True, related_name='after_wo_status')
+    comment = models.CharField(max_length=1000, null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.PROTECT, null=False, blank=False, related_name='author_wo_status')
 
     # make indexes for all the fields
     class Meta:

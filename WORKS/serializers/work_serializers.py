@@ -59,28 +59,21 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
     #     return new_wo
 
     # la methode update doit doit être utilisée pour gérer l'objet status reçu lors de la création, car serializer imbriqué
+    # update est utilisé lors du changement de status du workorder
+    # update est utilisé lors du changement du responsable du workorder
     def update(self, instance, validated_data):
-        print(f"AZIZ - update - validated_data: {validated_data}")
-        #print(f"AZIZ update wo - validate data: {validated_data}")
-        # wo_id = validated_data["id"]  #  on pourrait utilisé le parametre instance
-        # print(f"AZIZ wo_id: {wo_id}")
-        # status = validated_data.pop('status')
-        # status_id = status.pop("id")  # il faut faire pop pour extraire l'element dans ordered_dict
-        # status_obj = WorkStatusModel.objects.get(pk=status_id)
-        # room = validated_data.pop('room')
-        # room_id = room.pop("id")
-        # room_obj = RoomModel.objects.get(pk=room_id)
-        # print(f"AZIZ status_obj: {status_obj}")
-        #  on met à jour le work order
-        # WorkOrderModel.objects.filter(pk=wo_id).update(**validated_data)#, status=status_obj, room=room_obj)
-        # updated_wo = WorkOrderModel.objects.get(pk=wo_id)
-        # return updated_wo
+        # get the current user to set it as the author of the status change
+        current_user = self.context['request'].user
+        print(f"--- AZIZ type current_user: {type(current_user)} - username: {current_user.username}")
 
-        # we suppose that we update only the status and the assignee
-        # update the instance with the validated data save it and return it
-        instance.assignee = validated_data.get('assignee', instance.assignee) # retrieve the value of the 'assignee'
-        # key in the validated_data dictionary, and if the key is not present, it returns the current value of the
-        # instance.assignee attribute.
+        # check if the assignee received is different from the current assignee - if yes, we record the event
+        new_assignee = validated_data.get('assignee', None)
+        if (new_assignee != instance.assignee) and (new_assignee is not None):
+            # we create a new record in the WorkOrderStatusModel
+            WorkOrderStatusModel.objects.create(status_before=instance.status, status_after=instance.status,
+                                                work_order=instance, author=current_user, comment="changement de responsable")
+            instance.assignee = new_assignee
+            instance.save()
 
         # we check if the status received is different from the current status
         if instance.status != validated_data.get('status', instance.status):
@@ -88,17 +81,24 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
             new_status = validated_data.get('status', instance.status)
             # record the event in the WorkOrderStatusModel
             WorkOrderStatusModel.objects.create(status_before=instance.status, status_after=new_status,
-                                                work_order=instance)
+                                                work_order=instance, author=current_user, comment="changement de status")
             # update the status of the work order
             instance.status = validated_data.get('status', instance.status)
-        instance.save()
+            instance.save()
+
+        # we check if we received a new comment - if yes we record it in the WorkOrderStatusModel with the current status
+        new_comment = validated_data.get('comment', None) # retrieve the value of the 'comment' key in the validated_data dictionary if it exists else None
+        if new_comment is not None:
+            WorkOrderStatusModel.objects.create(status_before=instance.status, status_after=instance.status,
+                                                work_order=instance, author=current_user, comment=new_comment)
+            instance.save()
 
         # we send email to the assignee
         # we get the assignee email
         email_to = instance.assignee.email
         email_subject = f"Ordre de travail {instance.id} mis à jour"
         email_body = f"Numéro ordre travail: {instance.id}\nResponsable: {instance.assignee.username},\n" \
-                     f"Nouveau status: {instance.status}\n"
+                     f"Nouveau status: {instance.status}\nAuteur du changement: {current_user.username}\n"
         email_from = settings.EMAIL_HOST_USER
         send_mail(
             email_subject,
@@ -135,11 +135,13 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
         return new_wo
 
 
+#WorkOrderStatusSerializer is used to display the status history of a work order
 class WorkOrderStatusSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.IntegerField(read_only=False, required=False)  # on met le champs pour forcer l'affichage
     work_order_id_read_only = serializers.CharField(source='work_order.id', read_only=True, required=False)
     status_before_read_only = serializers.CharField(source='status_before.name', read_only=True, required=False)
     status_after_read_only = serializers.CharField(source='status_after.name', read_only=True, required=False)
+    author_read_only = serializers.CharField(source='author.username', read_only=True, required=False)
 
     class Meta:
         model = WorkOrderStatusModel
