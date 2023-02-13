@@ -94,18 +94,19 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
             instance.save()
 
         # we send email to the assignee
-        # we get the assignee email
-        email_to = instance.assignee.email
-        email_subject = f"Ordre de travail {instance.id} mis à jour"
-        email_body = f"Numéro ordre travail: {instance.id}\nResponsable: {instance.assignee.username},\n" \
-                     f"Nouveau status: {instance.status}\nAuteur du changement: {current_user.username}\n"
-        email_from = settings.EMAIL_HOST_USER
-        send_mail(
-            email_subject,
-            email_body,
-            email_from,
-            [email_to],
-        )
+        # we get the assignee email if it exists
+        if (instance.assignee is not None) and (instance.assignee.email is not None):
+            email_to = instance.assignee.email
+            email_subject = f"Ordre de travail {instance.id} mis à jour"
+            email_body = f"Numéro ordre travail: {instance.id}\nResponsable: {instance.assignee.username},\n" \
+                         f"Nouveau status: {instance.status}\nAuteur du changement: {current_user.username}\n"
+            email_from = settings.EMAIL_HOST_USER
+            send_mail(
+                email_subject,
+                email_body,
+                email_from,
+                [email_to],
+            )
         return instance
     # add a method to override the create method: to send an email to the assignee, the reporter and the users of the admin group
     def create(self, validated_data):
