@@ -32,6 +32,7 @@ class WorkOrderStatusViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]  # to force authentication
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
     filterset_fields = ['work_order']  # to filter by work_order
+    ordering_fields = ['event_date_time']  # to order by event_date_time
 
 # this view will be used to get all the data from the 3 models
 # to have 

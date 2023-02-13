@@ -41,6 +41,7 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
     # facility_read_only is a read only field used to display the facility in the list of workorders
     facility_read_only = serializers.CharField(source='room.floor.facility.facility_name', read_only=True, required=False)
     job_read_only = serializers.CharField(source='job.job', read_only=True, required=False)
+    comment = serializers.CharField(required=False, allow_blank=True, allow_null=True) # used to comment to the workorder status history
     class Meta:
         model = WorkOrderModel
         fields = "__all__"
@@ -64,7 +65,6 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
     def update(self, instance, validated_data):
         # get the current user to set it as the author of the status change
         current_user = self.context['request'].user
-        print(f"--- AZIZ type current_user: {type(current_user)} - username: {current_user.username}")
 
         # check if the assignee received is different from the current assignee - if yes, we record the event
         new_assignee = validated_data.get('assignee', None)
@@ -88,7 +88,7 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
 
         # we check if we received a new comment - if yes we record it in the WorkOrderStatusModel with the current status
         new_comment = validated_data.get('comment', None) # retrieve the value of the 'comment' key in the validated_data dictionary if it exists else None
-        if new_comment is not None:
+        if (new_comment is not None) and (new_comment != ""):
             WorkOrderStatusModel.objects.create(status_before=instance.status, status_after=instance.status,
                                                 work_order=instance, author=current_user, comment=new_comment)
             instance.save()
