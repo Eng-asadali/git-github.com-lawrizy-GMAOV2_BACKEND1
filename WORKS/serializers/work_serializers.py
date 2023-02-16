@@ -42,6 +42,9 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
     facility_read_only = serializers.CharField(source='room.floor.facility.facility_name', read_only=True, required=False)
     job_read_only = serializers.CharField(source='job.job', read_only=True, required=False)
     comment = serializers.CharField(required=False, allow_blank=True, allow_null=True) # used to comment to the workorder status history
+    equipment_read_only = serializers.CharField(source='equipment.name', read_only=True, required=False)
+    domain_read_only = serializers.CharField(source='domain.name', read_only=True, required=False)
+    job_type_read_only = serializers.CharField(source='job_type.name', read_only=True, required=False)
     class Meta:
         model = WorkOrderModel
         fields = "__all__"
