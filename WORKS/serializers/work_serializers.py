@@ -100,9 +100,11 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
         # we get the assignee email if it exists
         if (instance.assignee is not None) and (instance.assignee.email is not None):
             email_to = instance.assignee.email
-            email_subject = f"Ordre de travail {instance.id} mis à jour"
+            email_subject = f"Ordre de travail {instance.id} mis a jour"
             email_body = f"Numéro ordre travail: {instance.id}\nResponsable: {instance.assignee.username},\n" \
                          f"Nouveau status: {instance.status}\nAuteur du changement: {current_user.username}\n"
+            if instance.description is not None:
+                email_body += f"Description: {instance.description}"
             email_from = settings.EMAIL_HOST_USER
             send_mail(
                 email_subject,
@@ -128,7 +130,9 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
         email_subject = f"Nouvel ordre de travail {new_wo.id}"
         email_body = f"Numéro ordre travail: {new_wo.id}\nRapporteur: {new_wo.reporter.username},\n" \
                      f"Status: {new_wo.status}\nLocal: {new_wo.room.room},\n" \
-                     f"Intervention: {new_wo.job.job},\n"
+                     f"Intervention: {new_wo.job.job}"
+        if new_wo.description is not None:
+            email_body += f"\nDescription: {new_wo.description}"
         email_from = settings.EMAIL_HOST_USER
         send_mail(
             email_subject,
