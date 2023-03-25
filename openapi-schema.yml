@@ -1,0 +1,3194 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /assets/company/:
+    get:
+      operationId: listCompanys
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+          description: ''
+      tags:
+      - assets
+    post:
+      operationId: createCompany
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Company'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+      tags:
+      - assets
+  /assets/company/{id}/:
+    get:
+      operationId: retrieveCompany
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this company.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+      tags:
+      - assets
+    put:
+      operationId: updateCompany
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this company.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Company'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+      tags:
+      - assets
+    patch:
+      operationId: partialUpdateCompany
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this company.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Company'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+      tags:
+      - assets
+    delete:
+      operationId: destroyCompany
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this company.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - assets
+  /assets/facility/:
+    get:
+      operationId: listFacilitys
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Facility'
+          description: ''
+      tags:
+      - assets
+    post:
+      operationId: createFacility
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Facility'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Facility'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Facility'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Facility'
+          description: ''
+      tags:
+      - assets
+  /assets/facility/{id}/:
+    get:
+      operationId: retrieveFacility
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this facility.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Facility'
+          description: ''
+      tags:
+      - assets
+    put:
+      operationId: updateFacility
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this facility.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Facility'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Facility'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Facility'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Facility'
+          description: ''
+      tags:
+      - assets
+    patch:
+      operationId: partialUpdateFacility
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this facility.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Facility'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Facility'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Facility'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Facility'
+          description: ''
+      tags:
+      - assets
+    delete:
+      operationId: destroyFacility
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this facility.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - assets
+  /assets/floor/:
+    get:
+      operationId: listFloorModels
+      description: ''
+      parameters:
+      - name: facility__facility_name
+        required: false
+        in: query
+        description: facility__facility_name
+        schema:
+          type: string
+      - name: facility
+        required: false
+        in: query
+        description: facility
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Floor'
+          description: ''
+      tags:
+      - assets
+    post:
+      operationId: createFloorModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Floor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Floor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Floor'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Floor'
+          description: ''
+      tags:
+      - assets
+  /assets/floor/{id}/:
+    get:
+      operationId: retrieveFloorModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this floor model.
+        schema:
+          type: string
+      - name: facility__facility_name
+        required: false
+        in: query
+        description: facility__facility_name
+        schema:
+          type: string
+      - name: facility
+        required: false
+        in: query
+        description: facility
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Floor'
+          description: ''
+      tags:
+      - assets
+    put:
+      operationId: updateFloorModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this floor model.
+        schema:
+          type: string
+      - name: facility__facility_name
+        required: false
+        in: query
+        description: facility__facility_name
+        schema:
+          type: string
+      - name: facility
+        required: false
+        in: query
+        description: facility
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Floor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Floor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Floor'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Floor'
+          description: ''
+      tags:
+      - assets
+    patch:
+      operationId: partialUpdateFloorModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this floor model.
+        schema:
+          type: string
+      - name: facility__facility_name
+        required: false
+        in: query
+        description: facility__facility_name
+        schema:
+          type: string
+      - name: facility
+        required: false
+        in: query
+        description: facility
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Floor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Floor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Floor'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Floor'
+          description: ''
+      tags:
+      - assets
+    delete:
+      operationId: destroyFloorModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this floor model.
+        schema:
+          type: string
+      - name: facility__facility_name
+        required: false
+        in: query
+        description: facility__facility_name
+        schema:
+          type: string
+      - name: facility
+        required: false
+        in: query
+        description: facility
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - assets
+  /assets/room/:
+    get:
+      operationId: listRoomModels
+      description: ''
+      parameters:
+      - name: floor
+        required: false
+        in: query
+        description: floor
+        schema:
+          type: string
+      - name: room_type
+        required: false
+        in: query
+        description: room_type
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+          description: ''
+      tags:
+      - assets
+    post:
+      operationId: createRoomModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Room'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+          description: ''
+      tags:
+      - assets
+  /assets/room/{id}/:
+    get:
+      operationId: retrieveRoomModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this room model.
+        schema:
+          type: string
+      - name: floor
+        required: false
+        in: query
+        description: floor
+        schema:
+          type: string
+      - name: room_type
+        required: false
+        in: query
+        description: room_type
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+          description: ''
+      tags:
+      - assets
+    put:
+      operationId: updateRoomModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this room model.
+        schema:
+          type: string
+      - name: floor
+        required: false
+        in: query
+        description: floor
+        schema:
+          type: string
+      - name: room_type
+        required: false
+        in: query
+        description: room_type
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Room'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+          description: ''
+      tags:
+      - assets
+    patch:
+      operationId: partialUpdateRoomModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this room model.
+        schema:
+          type: string
+      - name: floor
+        required: false
+        in: query
+        description: floor
+        schema:
+          type: string
+      - name: room_type
+        required: false
+        in: query
+        description: room_type
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Room'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+          description: ''
+      tags:
+      - assets
+    delete:
+      operationId: destroyRoomModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this room model.
+        schema:
+          type: string
+      - name: floor
+        required: false
+        in: query
+        description: floor
+        schema:
+          type: string
+      - name: room_type
+        required: false
+        in: query
+        description: room_type
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - assets
+  /assets/equipment/:
+    get:
+      operationId: listEquipmentModels
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+          description: ''
+      tags:
+      - assets
+    post:
+      operationId: createEquipmentModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+      tags:
+      - assets
+  /assets/equipment/{id}/:
+    get:
+      operationId: retrieveEquipmentModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this equipment model.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+      tags:
+      - assets
+    put:
+      operationId: updateEquipmentModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this equipment model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+      tags:
+      - assets
+    patch:
+      operationId: partialUpdateEquipmentModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this equipment model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+      tags:
+      - assets
+    delete:
+      operationId: destroyEquipmentModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this equipment model.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - assets
+  /assets/equipment_family/:
+    get:
+      operationId: listEquipmentFamilyModels
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EquipmentFamily'
+          description: ''
+      tags:
+      - assets
+    post:
+      operationId: createEquipmentFamilyModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipmentFamily'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EquipmentFamily'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EquipmentFamily'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EquipmentFamily'
+          description: ''
+      tags:
+      - assets
+  /assets/equipment_family/{id}/:
+    get:
+      operationId: retrieveEquipmentFamilyModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this equipment family model.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EquipmentFamily'
+          description: ''
+      tags:
+      - assets
+    put:
+      operationId: updateEquipmentFamilyModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this equipment family model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipmentFamily'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EquipmentFamily'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EquipmentFamily'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EquipmentFamily'
+          description: ''
+      tags:
+      - assets
+    patch:
+      operationId: partialUpdateEquipmentFamilyModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this equipment family model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipmentFamily'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EquipmentFamily'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EquipmentFamily'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EquipmentFamily'
+          description: ''
+      tags:
+      - assets
+    delete:
+      operationId: destroyEquipmentFamilyModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this equipment family model.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - assets
+  /assets/room_type/:
+    get:
+      operationId: listRoomTypeModels
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoomType'
+          description: ''
+      tags:
+      - assets
+    post:
+      operationId: createRoomTypeModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RoomType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RoomType'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomType'
+          description: ''
+      tags:
+      - assets
+  /assets/room_type/{id}/:
+    get:
+      operationId: retrieveRoomTypeModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this room type model.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomType'
+          description: ''
+      tags:
+      - assets
+    put:
+      operationId: updateRoomTypeModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this room type model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RoomType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RoomType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomType'
+          description: ''
+      tags:
+      - assets
+    patch:
+      operationId: partialUpdateRoomTypeModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this room type model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RoomType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RoomType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomType'
+          description: ''
+      tags:
+      - assets
+    delete:
+      operationId: destroyRoomTypeModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this room type model.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - assets
+  /works/domain/:
+    get:
+      operationId: listDomainModels
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Domain'
+          description: ''
+      tags:
+      - works
+    post:
+      operationId: createDomainModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Domain'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Domain'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Domain'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+          description: ''
+      tags:
+      - works
+  /works/domain/{id}/:
+    get:
+      operationId: retrieveDomainModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this domain model.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+          description: ''
+      tags:
+      - works
+    put:
+      operationId: updateDomainModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this domain model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Domain'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Domain'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Domain'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+          description: ''
+      tags:
+      - works
+    patch:
+      operationId: partialUpdateDomainModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this domain model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Domain'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Domain'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Domain'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+          description: ''
+      tags:
+      - works
+    delete:
+      operationId: destroyDomainModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this domain model.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - works
+  /works/job_type/:
+    get:
+      operationId: listJobTypeModels
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobType'
+          description: ''
+      tags:
+      - works
+    post:
+      operationId: createJobTypeModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/JobType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/JobType'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobType'
+          description: ''
+      tags:
+      - works
+  /works/job_type/{id}/:
+    get:
+      operationId: retrieveJobTypeModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this job type model.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobType'
+          description: ''
+      tags:
+      - works
+    put:
+      operationId: updateJobTypeModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this job type model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/JobType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/JobType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobType'
+          description: ''
+      tags:
+      - works
+    patch:
+      operationId: partialUpdateJobTypeModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this job type model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/JobType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/JobType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobType'
+          description: ''
+      tags:
+      - works
+    delete:
+      operationId: destroyJobTypeModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this job type model.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - works
+  /works/job/:
+    get:
+      operationId: listJobModels
+      description: ''
+      parameters:
+      - name: domain_id
+        required: false
+        in: query
+        description: domain_id
+        schema:
+          type: string
+      - name: job_type_id
+        required: false
+        in: query
+        description: job_type_id
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+          description: ''
+      tags:
+      - works
+    post:
+      operationId: createJobModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Job'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+      tags:
+      - works
+  /works/job/{id}/:
+    get:
+      operationId: retrieveJobModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this job model.
+        schema:
+          type: string
+      - name: domain_id
+        required: false
+        in: query
+        description: domain_id
+        schema:
+          type: string
+      - name: job_type_id
+        required: false
+        in: query
+        description: job_type_id
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+      tags:
+      - works
+    put:
+      operationId: updateJobModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this job model.
+        schema:
+          type: string
+      - name: domain_id
+        required: false
+        in: query
+        description: domain_id
+        schema:
+          type: string
+      - name: job_type_id
+        required: false
+        in: query
+        description: job_type_id
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Job'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+      tags:
+      - works
+    patch:
+      operationId: partialUpdateJobModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this job model.
+        schema:
+          type: string
+      - name: domain_id
+        required: false
+        in: query
+        description: domain_id
+        schema:
+          type: string
+      - name: job_type_id
+        required: false
+        in: query
+        description: job_type_id
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Job'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+      tags:
+      - works
+    delete:
+      operationId: destroyJobModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this job model.
+        schema:
+          type: string
+      - name: domain_id
+        required: false
+        in: query
+        description: domain_id
+        schema:
+          type: string
+      - name: job_type_id
+        required: false
+        in: query
+        description: job_type_id
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - works
+  /works/work_status/:
+    get:
+      operationId: listWorkStatusModels
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkStatus'
+          description: ''
+      tags:
+      - works
+    post:
+      operationId: createWorkStatusModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkStatus'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkStatus'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkStatus'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkStatus'
+          description: ''
+      tags:
+      - works
+  /works/work_status/{id}/:
+    get:
+      operationId: retrieveWorkStatusModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work status model.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkStatus'
+          description: ''
+      tags:
+      - works
+    put:
+      operationId: updateWorkStatusModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work status model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkStatus'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkStatus'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkStatus'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkStatus'
+          description: ''
+      tags:
+      - works
+    patch:
+      operationId: partialUpdateWorkStatusModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work status model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkStatus'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkStatus'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkStatus'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkStatus'
+          description: ''
+      tags:
+      - works
+    delete:
+      operationId: destroyWorkStatusModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work status model.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - works
+  /works/work_order/:
+    get:
+      operationId: listWorkOrderModels
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkOrder'
+          description: ''
+      tags:
+      - works
+    post:
+      operationId: createWorkOrderModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+          description: ''
+      tags:
+      - works
+  /works/work_order/{id}/:
+    get:
+      operationId: retrieveWorkOrderModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order model.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+          description: ''
+      tags:
+      - works
+    put:
+      operationId: updateWorkOrderModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+          description: ''
+      tags:
+      - works
+    patch:
+      operationId: partialUpdateWorkOrderModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order model.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+          description: ''
+      tags:
+      - works
+    delete:
+      operationId: destroyWorkOrderModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order model.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - works
+  /works/work_order_status/:
+    get:
+      operationId: listWorkOrderStatusModels
+      description: ''
+      parameters:
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkOrderStatus'
+          description: ''
+      tags:
+      - works
+    post:
+      operationId: createWorkOrderStatusModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrderStatus'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkOrderStatus'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkOrderStatus'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderStatus'
+          description: ''
+      tags:
+      - works
+  /works/work_order_status/{id}/:
+    get:
+      operationId: retrieveWorkOrderStatusModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order status model.
+        schema:
+          type: string
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderStatus'
+          description: ''
+      tags:
+      - works
+    put:
+      operationId: updateWorkOrderStatusModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order status model.
+        schema:
+          type: string
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrderStatus'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkOrderStatus'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkOrderStatus'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderStatus'
+          description: ''
+      tags:
+      - works
+    patch:
+      operationId: partialUpdateWorkOrderStatusModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order status model.
+        schema:
+          type: string
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrderStatus'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkOrderStatus'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkOrderStatus'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderStatus'
+          description: ''
+      tags:
+      - works
+    delete:
+      operationId: destroyWorkOrderStatusModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order status model.
+        schema:
+          type: string
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - works
+  /works/work_order_picture/:
+    get:
+      operationId: listWorkOrderPictureModels
+      description: ''
+      parameters:
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkOrderPicture'
+          description: ''
+      tags:
+      - works
+    post:
+      operationId: createWorkOrderPictureModel
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkOrderPicture'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkOrderPicture'
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/WorkOrderPicture'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderPicture'
+          description: ''
+      tags:
+      - works
+  /works/work_order_picture/{id}/:
+    get:
+      operationId: retrieveWorkOrderPictureModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order picture model.
+        schema:
+          type: string
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderPicture'
+          description: ''
+      tags:
+      - works
+    put:
+      operationId: updateWorkOrderPictureModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order picture model.
+        schema:
+          type: string
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkOrderPicture'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkOrderPicture'
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/WorkOrderPicture'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderPicture'
+          description: ''
+      tags:
+      - works
+    patch:
+      operationId: partialUpdateWorkOrderPictureModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order picture model.
+        schema:
+          type: string
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WorkOrderPicture'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WorkOrderPicture'
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/WorkOrderPicture'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderPicture'
+          description: ''
+      tags:
+      - works
+    delete:
+      operationId: destroyWorkOrderPictureModel
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this work order picture model.
+        schema:
+          type: string
+      - name: work_order
+        required: false
+        in: query
+        description: work_order
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - works
+  /hr/user/:
+    get:
+      operationId: listUsers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - hr
+    post:
+      operationId: createUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - hr
+  /hr/user/{id}/:
+    get:
+      operationId: retrieveUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - hr
+    put:
+      operationId: updateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - hr
+    patch:
+      operationId: partialUpdateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - hr
+    delete:
+      operationId: destroyUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - hr
+  /hr/current_user/:
+    get:
+      operationId: listCurrentUsers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - hr
+  /assets/uploadCompany/:
+    post:
+      operationId: createUploadCompany
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - assets
+  /assets/room_type/room_type_upload/:
+    post:
+      operationId: createRoomTypeUpload
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - assets
+  /assets/room/room_upload/:
+    post:
+      operationId: createRoomUpload
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - assets
+  /assets/floor/floor_upload/:
+    post:
+      operationId: createFloorUpload
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - assets
+  /works/domain/domain_upload/:
+    post:
+      operationId: createDomainUpload
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - works
+  /works/job/job_upload/:
+    post:
+      operationId: createJobUpload
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - works
+  /hr/api-token-auth/:
+    post:
+      operationId: createAuthToken
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+          description: ''
+      tags:
+      - hr
+components:
+  schemas:
+    Company:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        company_name:
+          type: string
+          maxLength: 255
+        company_description:
+          type: string
+          nullable: true
+          maxLength: 255
+      required:
+      - company_name
+    Facility:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        city:
+          type: string
+          nullable: true
+        locality:
+          type: string
+          nullable: true
+        number:
+          type: string
+          nullable: true
+        postal_code:
+          type: string
+          nullable: true
+        image:
+          type: string
+          format: binary
+          nullable: true
+        company:
+          type: object
+          properties:
+            url:
+              type: string
+              readOnly: true
+            id:
+              type: integer
+            company_name:
+              type: string
+              maxLength: 255
+            company_description:
+              type: string
+              nullable: true
+              maxLength: 255
+          required:
+          - company_name
+        facility_name:
+          type: string
+          maxLength: 500
+        street:
+          type: string
+          nullable: true
+          maxLength: 500
+        surface_area:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 100000000
+          minimum: -100000000
+          nullable: true
+      required:
+      - company
+      - facility_name
+    Floor:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        facility_read_only:
+          type: string
+          readOnly: true
+        floor:
+          type: string
+          maxLength: 30
+        facility:
+          type: string
+      required:
+      - floor
+      - facility
+    Room:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        room_type_read_only:
+          type: string
+          readOnly: true
+        floor_read_only:
+          type: string
+          readOnly: true
+        facility_read_only:
+          type: string
+          readOnly: true
+        room:
+          type: string
+          maxLength: 100
+        floor:
+          type: string
+        room_type:
+          type: string
+      required:
+      - room
+      - floor
+      - room_type
+    Equipment:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          maxLength: 250
+        parent_id:
+          type: string
+          nullable: true
+        room_id:
+          type: string
+          nullable: true
+        family_id:
+          type: string
+          nullable: true
+      required:
+      - name
+    EquipmentFamily:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          maxLength: 250
+        parent_id:
+          type: string
+          nullable: true
+      required:
+      - name
+    RoomType:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        room_type:
+          type: string
+          maxLength: 40
+        code:
+          type: string
+          maxLength: 2
+      required:
+      - room_type
+      - code
+    Domain:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          maxLength: 255
+      required:
+      - name
+    JobType:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        name:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+          maxLength: 200
+      required:
+      - name
+      - description
+    Job:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        job:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+        job_type_id:
+          type: string
+        domain_id:
+          type: string
+      required:
+      - job
+      - job_type_id
+      - domain_id
+    WorkStatus:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        name:
+          type: string
+          maxLength: 255
+        position:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+      required:
+      - name
+      - position
+    WorkOrder:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        creation_date:
+          type: string
+          format: date-time
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        status_read_only:
+          type: string
+          readOnly: true
+        room_read_only:
+          type: string
+          readOnly: true
+        reporter_read_only:
+          type: string
+          readOnly: true
+        assignee_read_only:
+          type: string
+          readOnly: true
+        facility_read_only:
+          type: string
+          readOnly: true
+        job_read_only:
+          type: string
+          readOnly: true
+        comment:
+          type: string
+          nullable: true
+        equipment_read_only:
+          type: string
+          readOnly: true
+        domain_read_only:
+          type: string
+          readOnly: true
+        job_type_read_only:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          nullable: true
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          maxLength: 1000
+        room:
+          type: string
+        job_type:
+          type: string
+        status:
+          type: string
+        equipment:
+          type: string
+          nullable: true
+        reporter:
+          type: string
+        assignee:
+          type: string
+          nullable: true
+        job:
+          type: string
+        domain:
+          type: string
+      required:
+      - room
+      - job_type
+      - status
+      - reporter
+      - job
+      - domain
+    WorkOrderStatus:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        work_order_id_read_only:
+          type: string
+          readOnly: true
+        status_before_read_only:
+          type: string
+          readOnly: true
+        status_after_read_only:
+          type: string
+          readOnly: true
+        author_read_only:
+          type: string
+          readOnly: true
+        event_date_time:
+          type: string
+          format: date-time
+          readOnly: true
+        comment:
+          type: string
+          nullable: true
+          maxLength: 1000
+        work_order:
+          type: string
+        status_before:
+          type: string
+          nullable: true
+        status_after:
+          type: string
+          nullable: true
+        author:
+          type: string
+      required:
+      - work_order
+      - author
+    WorkOrderPicture:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+        work_order_id_read_only:
+          type: string
+          readOnly: true
+        picture:
+          type: string
+          format: binary
+          nullable: true
+        work_order:
+          type: string
+      required:
+      - work_order
+    User:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        groups:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                maxLength: 150
+            required:
+            - name
+        password:
+          type: string
+          writeOnly: true
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+\z
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        is_staff:
+          type: boolean
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        user_permissions:
+          type: array
+          items:
+            type: string
+          description: Specific permissions for this user.
+      required:
+      - username
+    AuthToken:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        token:
+          type: string
+          readOnly: true
+      required:
+      - username
+      - password
