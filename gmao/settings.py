@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-e+tfcq2z4f4!bqk-#q#tgldixi80c@p_51lg4q(=e$n!@v6ef_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "api.hazard.gmao.app"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "api.hazard.gmao.app", "api.cocof.gmao.app"]
 
 
 # Application definition
@@ -120,9 +120,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "https://hazard.gmao.app",
     "https://www.hazard.gmao.app",
-    'http://localhost:8100',  # ionic serve
-    'http://localhost',  # ionic serve
-    'capacitor://localhost',  # ionic capacitor for ios
+    "https://api.cocof.gmao.app",
+    "https://cocof.gmao.app",
+    "https://www.cocof.gmao.app",
 ]
 
 
