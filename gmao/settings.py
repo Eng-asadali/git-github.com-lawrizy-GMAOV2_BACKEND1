@@ -161,10 +161,17 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # email configuration
+
+# get sendgrid api key from environment variable only for COCOF production server
+if  "SENDGRID_API_KEY" in os.environ:
+    SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
 # set the email backend depending on the environment
 if "GMAO_ENV" in os.environ:
     if os.environ["GMAO_ENV"] == "PRODUCTION":
-        EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # used for production server
+        if os.environ["GMAO_EMAIL_BACKEND"] == "SENDGRID":
+            EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend' # used for production server with SENDGRID: COCOF
+        else:
+            EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # used for production server with SMTP server: HAZARD
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # used for local machine
 
@@ -174,22 +181,22 @@ if "GMAO_EMAIL_HOST_USER" in os.environ:
 else:
     EMAIL_HOST_USER = 'aziz.lawrizy@gmao.app'
 
-# the env var below are used by sendgrid of cocof.gmao.app
-if "GMAO_EMAIL_HOST" in os.environ:
-    EMAIL_HOST = os.environ["GMAO_EMAIL_HOST"]
-else:
-    EMAIL_HOST = 'localhost'
-
-# the env var below are used by sendgrid API key
-if "GMAO_EMAIL_HOST_PASSWORD" in os.environ:
-    EMAIL_HOST_PASSWORD = os.environ["GMAO_EMAIL_HOST_PASSWORD"]
-
-# the env var below are used by sendgrid port
-if "GMAO_EMAIL_PORT" in os.environ:
-    EMAIL_PORT = os.environ["GMAO_EMAIL_PORT"]
-else:
-    EMAIL_PORT = 25
-
-# the env var below are used by sendgrid port
-if "GMAO_EMAIL_USE_TLS" in os.environ:
-    EMAIL_USE_TLS = os.environ["GMAO_EMAIL_USE_TLS"]
+# # the env var below are used by sendgrid of cocof.gmao.app
+# if "GMAO_EMAIL_HOST" in os.environ:
+#     EMAIL_HOST = os.environ["GMAO_EMAIL_HOST"]
+# else:
+#     EMAIL_HOST = 'localhost'
+#
+# # the env var below are used by sendgrid API key
+# if "GMAO_EMAIL_HOST_PASSWORD" in os.environ:
+#     EMAIL_HOST_PASSWORD = os.environ["GMAO_EMAIL_HOST_PASSWORD"]
+#
+# # the env var below are used by sendgrid port
+# if "GMAO_EMAIL_PORT" in os.environ:
+#     EMAIL_PORT = os.environ["GMAO_EMAIL_PORT"]
+# else:
+#     EMAIL_PORT = 25
+#
+# # the env var below are used by sendgrid port
+# if "GMAO_EMAIL_USE_TLS" in os.environ:
+#     EMAIL_USE_TLS = os.environ["GMAO_EMAIL_USE_TLS"]
