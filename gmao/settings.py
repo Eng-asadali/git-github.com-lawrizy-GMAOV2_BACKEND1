@@ -170,6 +170,7 @@ if "GMAO_ENV" in os.environ:
     if os.environ["GMAO_ENV"] == "PRODUCTION":
         if os.environ["GMAO_EMAIL_BACKEND"] == "SENDGRID":
             EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend' # used for production server with SENDGRID: COCOF
+            SENDGRID_SANDBOX_MODE_IN_DEBUG = False # used for production server with SENDGRID: COCOF
         else:
             EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # used for production server with SMTP server: HAZARD
 else:
