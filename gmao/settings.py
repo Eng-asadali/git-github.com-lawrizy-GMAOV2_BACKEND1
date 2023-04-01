@@ -167,9 +167,29 @@ if "GMAO_ENV" in os.environ:
         EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # used for production server
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # used for local machine
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
+
+
 if "GMAO_EMAIL_HOST_USER" in os.environ:
     EMAIL_HOST_USER = os.environ["GMAO_EMAIL_HOST_USER"]
 else:
     EMAIL_HOST_USER = 'aziz.lawrizy@gmao.app'
+
+# the env var below are used by sendgrid of cocof.gmao.app
+if "GMAO_EMAIL_HOST" in os.environ:
+    EMAIL_HOST = os.environ["GMAO_EMAIL_HOST"]
+else:
+    EMAIL_HOST = 'localhost'
+
+# the env var below are used by sendgrid API key
+if "GMAO_EMAIL_HOST_PASSWORD" in os.environ:
+    EMAIL_HOST_PASSWORD = os.environ["GMAO_EMAIL_HOST_PASSWORD"]
+
+# the env var below are used by sendgrid port
+if "GMAO_EMAIL_PORT" in os.environ:
+    EMAIL_PORT = os.environ["GMAO_EMAIL_PORT"]
+else:
+    EMAIL_PORT = 25
+
+# the env var below are used by sendgrid port
+if "GMAO_EMAIL_USE_TLS" in os.environ:
+    EMAIL_USE_TLS = os.environ["GMAO_EMAIL_USE_TLS"]

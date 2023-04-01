@@ -18,3 +18,4 @@ HR/__pycache__/
 HR/migrations/__pycache__/
 .DS_Store
 media/
+env_var_gunicorn
