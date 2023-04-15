@@ -8,3 +8,5 @@ GMAO_MEDIA_ROOT="/var/www/html/static/media/"
 #AZIZ: env variable pour email
 GMAO_ENV="PRODUCTION"
 GMAO_EMAIL_HOST_USER="no_reply@hazard.gmao.app"
+
+GMAO_EMAIL_BACKEND = "POSTFIX"
