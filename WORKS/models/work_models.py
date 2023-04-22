@@ -1,13 +1,19 @@
 from django.core.files import File
 from django.core.files.storage import default_storage
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from ASSETS.models import RoomModel, EquipmentModel
 from .job_models import JobTypeModel, JobModel, DomainModel
 from django.contrib.auth.models import User
 from PIL import Image  # used for image resizing
+from .work_archive_models import WorkOrderArchiveModel
 import uuid
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+
+from django.utils import timezone
 
 # WorkStatusModel contiendra les status: todo, in_progress,closed
 class WorkStatusModel(models.Model):
@@ -142,3 +148,28 @@ class WorkOrderPictureModel(models.Model):
         else:
             super(WorkOrderPictureModel, self).save(*args, **kwargs)
             print(f"AZIZ picture saved")
+
+# the archive_work_order function is called when a work order is archived in the work_serializer when the status is changed
+# to 100 or more
+@receiver(post_save, sender=WorkOrderModel)
+def archive_work_order(sender, instance, **kwargs):
+    if instance.status.position >= 100:
+        # Archive the work order by creating a new record in the WorkOrderArchiveModel
+        WorkOrderArchiveModel.objects.create(
+            room=instance.room,
+            equipment=instance.equipment,
+            domain=instance.domain,
+            creation_date=instance.creation_date,
+            description=instance.description,
+            status=instance.status,
+            reporter=instance.reporter,
+            job=instance.job,
+            job_type=instance.job_type,
+            id=instance.id,
+            assignee=instance.assignee,
+            start_date=instance.start_date,
+            end_date=timezone.now(),
+        )
+
+        # Delete the work order
+        instance.delete()

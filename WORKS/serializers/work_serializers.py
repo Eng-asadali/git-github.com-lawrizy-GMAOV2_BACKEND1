@@ -4,10 +4,11 @@ from rest_framework import serializers
 from django.conf import settings
 
 from ..models.work_models import WorkStatusModel, WorkOrderStatusModel, WorkOrderModel, WorkOrderPictureModel
+from ..models.work_archive_models import WorkOrderArchiveModel
 from ASSETS.serializers.room_serializers import RoomSerializer
 from ASSETS.models.room_models import RoomModel
 from django.core.mail import send_mail
-
+from django.utils import timezone
 
 class WorkStatusSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.IntegerField(read_only=False, required=False)  # on met le champs pour forcer l'affichage
@@ -66,6 +67,7 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
     # update est utilisé lors du changement de status du workorder
     # update est utilisé lors du changement du responsable du workorder
     def update(self, instance, validated_data):
+        archive_wo = False
         # get the current user to set it as the author of the status change
         current_user = self.context['request'].user
 
@@ -80,6 +82,22 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
 
         # we check if the status received is different from the current status
         if instance.status != validated_data.get('status', instance.status):
+            #
+            # # we check if the status received has a position value higher than 100 - if yes we archive the work order
+            # if validated_data.get('status', instance.status).position >= 100:
+            #     # we archive the work order by creating a new record in the WorkOrderArchiveModel and deleting the work order
+            #     # we create a new record in the WorkOrderArchiveModel with the text value not the foreign key
+            #     WorkOrderArchiveModel.objects.create(room=instance.room, equipment=instance.equipment,
+            #                                          domain=instance.domain, creation_date=instance.creation_date,
+            #                                          description=instance.description, status=instance.status,
+            #                                          reporter=instance.reporter, job=instance.job, job_type=instance.job_type,
+            #                                          id = instance.id, assignee=instance.assignee, start_date=instance.start_date,
+            #                                          end_date=timezone.now())
+            #     archive_wo = True
+            # # else we update the status of the work order
+            # else:
+            #
+
             # we create a new record in the WorkOrderStatusModel
             new_status = validated_data.get('status', instance.status)
             # record the event in the WorkOrderStatusModel
@@ -112,6 +130,15 @@ class WorkOrderSerializer(serializers.HyperlinkedModelSerializer):
                 email_from,
                 [email_to],
             )
+        # if the status was above 100, we archived the work order and we delete it
+        #
+        # if archive_wo:
+        #     instance.delete()
+        #     # return text to inform the user that the work order was archived
+        #     raise ValueError("Work order archived")
+        # else:
+        #
+            # return the instance
         return instance
     # add a method to override the create method: to send an email to the assignee, the reporter and the users of the admin group
     def create(self, validated_data):
