@@ -1,10 +1,4 @@
-from django.core.files import File
-from django.core.files.storage import default_storage
 from django.db import models
-from ASSETS.models import RoomModel, EquipmentModel
-from .job_models import JobTypeModel, JobModel, DomainModel
-#from .work_models import WorkStatusModel
-from django.contrib.auth.models import User
 
 # Work order archive model: will store the closed work orders (having status position >=100) in read only mode and text only
 # all the foreign keys will be replaced by the name of the object
@@ -35,3 +29,16 @@ class WorkOrderArchiveModel(models.Model):
                                  'assignee', 'job', 'domain', 'creation_date', 'start_date', 'end_date'],
                          name='work_order_archive_idx'),
         ]
+
+#Work order status archive model: will store the status changes and the comments of the work orders
+#we store everything in text only and integer for the work order id
+#the archive will be read only after the work order is insert
+
+class WorkOrderStatusArchiveModel(models.Model):
+    work_order = models.IntegerField(null=False, blank=False)
+    event_date_time = models.DateTimeField(null=True, blank=True)
+    status_before = models.CharField(max_length=255, null=True, blank=True)
+    status_after = models.CharField(max_length=255, null=True, blank=True)
+    comment = models.CharField(max_length=1000, null=True, blank=True)
+    author = models.CharField(max_length=255, null=True, blank=True)
+

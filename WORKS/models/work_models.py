@@ -8,10 +8,8 @@ from ASSETS.models import RoomModel, EquipmentModel
 from .job_models import JobTypeModel, JobModel, DomainModel
 from django.contrib.auth.models import User
 from PIL import Image  # used for image resizing
-from .work_archive_models import WorkOrderArchiveModel
+from .work_archive_models import WorkOrderArchiveModel, WorkOrderStatusArchiveModel
 import uuid
-from django.core.files.storage import FileSystemStorage
-from django.conf import settings
 
 from django.utils import timezone
 
@@ -60,7 +58,7 @@ class WorkOrderModel(models.Model):
         ]
 
 
-# WorkOrderStatus cette table fait le lien entre status et work. Elle est utilisé pour garder l'historique des status
+# WorkOrderStatus cette table fait le lien entre status et work. Elle est utilisé pour garder l'historique des status et les commentaires
 class WorkOrderStatusModel(models.Model):
     work_order = models.ForeignKey(WorkOrderModel, on_delete=models.CASCADE,related_name='work_order_status')
     event_date_time = models.DateTimeField(auto_now_add=True)
@@ -150,7 +148,7 @@ class WorkOrderPictureModel(models.Model):
             print(f"AZIZ picture saved")
 
 # the archive_work_order function is called when a work order is archived in the work_serializer when the status is changed
-# to 100 or more
+# to 100 or more and the instance is saved
 @receiver(post_save, sender=WorkOrderModel)
 def archive_work_order(sender, instance, **kwargs):
     if instance.status.position >= 100:
@@ -170,6 +168,18 @@ def archive_work_order(sender, instance, **kwargs):
             start_date=instance.start_date,
             end_date=timezone.now(),
         )
+        # archive the work order status by creating a new record in the WorkOrderStatusArchiveModel
+        for status in instance.work_order_status.all():
+            WorkOrderStatusArchiveModel.objects.create(
+                work_order=status.work_order.id,
+                event_date_time=status.event_date_time,
+                status_before=status.status_before,
+                status_after=status.status_after,
+                comment=status.comment,
+                author=status.author,
+            )
+            # delete the work order status that was archived
+            status.delete()
 
-        # Delete the work order
+        # Delete the work order that was archived
         instance.delete()
