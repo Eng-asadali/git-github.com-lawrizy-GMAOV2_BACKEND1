@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
@@ -7,6 +7,7 @@ from ..serializers import FacilitySerializer, CompanySerializer
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser,FormParser
 from rest_framework import status
+from django_filters.rest_framework import DjangoFilterBackend # to filter the queryset
 
 
 # viewsets are easier than apiview because we don't have to define the methods
@@ -15,6 +16,9 @@ class FacilityViewset(viewsets.ModelViewSet):
     serializer_class = FacilitySerializer
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['facility_name', 'id']  # to filter by facility name or facility id
+    ordering_fields = ['facility_name', 'id']  # to order by facility name or facility id
     #parser_classes = [MultiPartParser,FormParser]
 
     # la methode update permet d'intercepter la request et voir le contenu avant le serializer

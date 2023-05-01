@@ -14,7 +14,8 @@ class FloorViewSet(viewsets.ModelViewSet):
     queryset = FloorModel.objects.all()
     serializer_class = FloorSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter] # to filter the queryset
-    filterset_fields = ['facility__facility_name', 'facility'] # to filter by facility name or facility id
+    filterset_fields = ['facility__facility_name', 'id', 'facility'] # to filter by facility name or facility id
+    ordering_fields = ['facility__facility_name', 'id', 'facility'] # to order by facility name or facility id
 
     # def partial_update(self, request, *args, **kwargs):
     #     serializer = FloorSerializer(self.get_object(),request.data,partial=True)

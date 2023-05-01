@@ -23,7 +23,9 @@ class WorkOrderViewset(viewsets.ModelViewSet):
     serializer_class = WorkOrderSerializer
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
-
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain']  # to filter by room
+    ordering_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain']  # to order by room
 
 class WorkOrderStatusViewset(viewsets.ModelViewSet):
     queryset = WorkOrderStatusModel.objects.all()

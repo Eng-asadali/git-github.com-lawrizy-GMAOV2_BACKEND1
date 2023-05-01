@@ -17,7 +17,8 @@ class RoomViewset(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
-    filterset_fields = ['floor', 'room_type']  # to filter by facility name or facility id
+    filterset_fields = ['floor', 'room_type']  # to filter by floor name or room_type id
+    ordering_fields = ['floor', 'room_type']  # to order by floor name or room_type id
 
 
 # la vue RoomUploadView sert pour upload des batch de room au format csv
