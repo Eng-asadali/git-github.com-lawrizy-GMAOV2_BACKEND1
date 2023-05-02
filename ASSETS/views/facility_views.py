@@ -2,6 +2,7 @@ from rest_framework import viewsets, filters
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from gmao.pagination import CustomPageNumberPagination
 from ..models import Facility
 from ..serializers import FacilitySerializer, CompanySerializer
 from rest_framework.response import Response
@@ -19,23 +20,7 @@ class FacilityViewset(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
     filterset_fields = ['facility_name', 'id']  # to filter by facility name or facility id
     ordering_fields = ['facility_name', 'id']  # to order by facility name or facility id
-    #parser_classes = [MultiPartParser,FormParser]
 
-    # la methode update permet d'intercepter la request et voir le contenu avant le serializer
-    # def update(self, request, *args, **kwargs):
-    #     partial = kwargs.pop('partial', False)
-    #     instance = self.get_object()
-    #     print("AZIZ request.data: ", request.data)
-    #     serializer = self.get_serializer(instance, data=request.data, partial=partial)
-    #     serializer.is_valid(raise_exception=True)
-    #     self.perform_update(serializer)
-    #
-    #     if getattr(instance, '_prefetched_objects_cache', None):
-    #         # If 'prefetch_related' has been applied to a queryset, we need to
-    #         # forcibly invalidate the prefetch cache on the instance.
-    #         instance._prefetched_objects_cache = {}
-    #
-    #     return Response(serializer.data)
 
     # le partial update est utilisé pour un update dont on ne communique pas tous les champs = PATCH
     # le patch nécessite d'instancier un serializer avec 3 params: objet de la db à modifier + les données reçues du client + partial = true + ctxt
@@ -83,3 +68,13 @@ class FacilityViewset(viewsets.ModelViewSet):
             print("Aziz  serial.data: ", serializer.data)
             print("Aziz serial error: ", serializer.errors)
             return Response(status=status.HTTP_400_BAD_REQUEST,data=serializer.errors)
+
+class FacilityPaginationViewset(viewsets.ModelViewSet):
+    queryset = Facility.objects.all().order_by('id')
+    serializer_class = FacilitySerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['facility_name', 'id']  # to filter by facility name or facility id
+    ordering_fields = ['facility_name', 'id']  # to order by facility name or facility id
+    pagination_class = CustomPageNumberPagination  # to set the number of items per page

@@ -9,6 +9,7 @@ import csv
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend # to filter the queryset
 from rest_framework import filters # to filter the queryset
+from gmao.pagination import CustomPageNumberPagination  # to set the pagination class
 
 
 class RoomViewset(viewsets.ModelViewSet):
@@ -46,3 +47,14 @@ class RoomUploadView(APIView):
                 # print("AZIZ upload done: ",line)
         content = {'upload company file': 'received and created'}
         return Response(content, status=status.HTTP_200_OK)
+
+# RoomPaginationViewset is used to paginate the room queryset
+class RoomPaginationViewset(viewsets.ModelViewSet):
+    queryset = RoomModel.objects.all().order_by('id') # to order the queryset for pagination
+    serializer_class = RoomSerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['floor', 'room_type','id']  # to filter by floor name or room_type id
+    ordering_fields = ['floor', 'room_type','id']  # to order by floor name or room_type id
+    pagination_class = CustomPageNumberPagination  # to set the pagination class

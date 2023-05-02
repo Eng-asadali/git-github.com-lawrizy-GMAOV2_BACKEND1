@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from gmao.pagination import CustomPageNumberPagination
 from ..serializers import RoomTypeSerializer
 from ..models import RoomTypeModel
 import csv
@@ -40,3 +41,12 @@ class RoomTypeUploadView(APIView):
                 print("AZIZ upload done: ",line)
         content = {'upload company file': 'received and created'}
         return Response(content, status=status.HTTP_200_OK)
+
+# RoomTypePaginationViewset is used to paginate the queryset
+class RoomTypePaginationViewset(viewsets.ModelViewSet):
+    queryset = RoomTypeModel.objects.all().order_by('id') #we need to order the queryset by id to use pagination
+    serializer_class = RoomTypeSerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    ordering_fields = ['room_type']
+    pagination_class = CustomPageNumberPagination # to set the pagination class

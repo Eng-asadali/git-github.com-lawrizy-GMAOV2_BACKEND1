@@ -1,4 +1,6 @@
 from rest_framework import viewsets, status, filters
+
+from gmao.pagination import CustomPageNumberPagination  # to set the pagination class
 from ..serializers import FloorSerializer
 from ..models import FloorModel, Facility
 from rest_framework.authentication import TokenAuthentication
@@ -16,14 +18,6 @@ class FloorViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter] # to filter the queryset
     filterset_fields = ['facility__facility_name', 'id', 'facility'] # to filter by facility name or facility id
     ordering_fields = ['facility__facility_name', 'id', 'facility'] # to order by facility name or facility id
-
-    # def partial_update(self, request, *args, **kwargs):
-    #     serializer = FloorSerializer(self.get_object(),request.data,partial=True)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         Response(serializer.data,status=status.HTTP_206_PARTIAL_CONTENT)
-    #     else:
-    #         Response(serializer.errors,status=status.HTTP_304_NOT_MODIFIED)
 
 
 # la vue RoomUploadView sert pour upload des batch de room au format csv
@@ -50,3 +44,11 @@ class FloorUploadView(APIView):
                 # print("AZIZ upload done: ",line)
         content = {'upload company file': 'received and created'}
         return Response(content, status=status.HTTP_200_OK)
+
+class FloorPaginationViewSet(viewsets.ModelViewSet):
+    queryset = FloorModel.objects.all().order_by('id') #we need to order the queryset by id to use pagination
+    serializer_class = FloorSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter] # to filter the queryset
+    filterset_fields = ['facility__facility_name', 'id', 'facility'] # to filter by facility name or facility id
+    ordering_fields = ['facility__facility_name', 'id', 'facility'] # to order by facility name or facility id
+    pagination_class = CustomPageNumberPagination # to set the pagination class

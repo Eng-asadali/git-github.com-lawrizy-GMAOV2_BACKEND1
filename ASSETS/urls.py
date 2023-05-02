@@ -15,7 +15,8 @@ Including another URLconf
 """
 from .views import CompanyViewSet, UploadCompanyView, FacilityViewset, FloorViewSet, \
     RoomViewset, EquipmentViewset, EquipmentFamilyViewset, RoomTypeViewset, RoomTypeUploadView, RoomUploadView, \
-    FloorUploadView
+    FloorUploadView, FloorPaginationViewSet, FacilityPaginationViewset, RoomPaginationViewset, \
+    RoomTypePaginationViewset, EquipmentPaginationViewset
 from rest_framework import routers
 from django.urls import path
 
@@ -25,11 +26,16 @@ router.register(r'company', CompanyViewSet) # le r devant la chaine de caractèr
 # caractere doit être traitée de manière brut
 # sans gérer d'eventuels caractères d'echapement
 router.register(r'facility', FacilityViewset)
+router.register(r'facility_pagination', FacilityPaginationViewset)  # to use pagination
 router.register(r'floor', FloorViewSet)
+router.register(r'floor_pagination', FloorPaginationViewSet)
 router.register(r'room', RoomViewset)
+router.register(r'room_pagination', RoomPaginationViewset)
 router.register(r'equipment', EquipmentViewset)
+router.register(r'equipment_pagination', EquipmentPaginationViewset)
 router.register(r'equipment_family', EquipmentFamilyViewset)
 router.register(r'room_type', RoomTypeViewset)
+router.register(r'room_type_pagination', RoomTypePaginationViewset)
 
 
 # pour les Apiview on utilise path
