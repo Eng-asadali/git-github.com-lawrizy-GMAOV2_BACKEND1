@@ -9,6 +9,7 @@ from ..serializers.work_serializers import WorkStatusSerializer, WorkOrderSerial
     WorkOrderPictureSerializer
 from django_filters.rest_framework import DjangoFilterBackend  # to filter the queryset
 from rest_framework import filters  # to filter the queryset
+from gmao.pagination import CustomPageNumberPagination  # to use our custom pagination
 
 
 class WorkStatusViewset(viewsets.ModelViewSet):
@@ -24,8 +25,8 @@ class WorkOrderViewset(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
-    filterset_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain']  # to filter by room
-    ordering_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain']  # to order by room
+    filterset_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain','id']  # to filter by room
+    ordering_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain','id']  # to order by room
 
 class WorkOrderStatusViewset(viewsets.ModelViewSet):
     queryset = WorkOrderStatusModel.objects.all()
@@ -36,20 +37,7 @@ class WorkOrderStatusViewset(viewsets.ModelViewSet):
     filterset_fields = ['work_order']  # to filter by work_order
     ordering_fields = ['event_date_time']  # to order by event_date_time
 
-# this view will be used to get all the data from the 3 models
-# to have 
-# @api_view(['GET'])
-# def wo_and_status_and_rooms(request):
-#     if request.method == 'GET':
-#         # first we get the querysets
-#         wo = WorkOrderModel.objects.all()
-#         rooms = RoomModel.objects.all()
-#         # then we serializer the data
-#         room_serializer = RoomSerializer(rooms, many=True, context={'request': request})
-#         wo_serializer = WorkOrderSerializer(wo, many=True, context={'request': request})
-#         data = room_serializer.data + wo_serializer.data
-#         data = {"wo": wo_serializer.data, "rooms": room_serializer.data}
-#         return Response(data)
+
 
 # I need a view that will be used to upload an image
 
@@ -62,3 +50,15 @@ class WorkOrderPictureViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]  # to force authentication
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
     filterset_fields = ['work_order']  # to filter by work_order
+
+
+# WorkOrderPaginationViewset is used to paginate the work order list
+class WorkOrderPaginationViewset(viewsets.ModelViewSet):
+    queryset = WorkOrderModel.objects.all().order_by('id')
+    serializer_class = WorkOrderSerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain','id']  # to filter by room
+    ordering_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain','id']  # to order by room
+    pagination_class = CustomPageNumberPagination  # to paginate the list

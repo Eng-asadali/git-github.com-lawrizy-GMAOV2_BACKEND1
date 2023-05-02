@@ -9,6 +9,7 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.views import APIView
 import csv
 from rest_framework.response import Response
+from gmao.pagination import CustomPageNumberPagination
 
 
 class JobTypeViewset(viewsets.ModelViewSet):
@@ -16,6 +17,9 @@ class JobTypeViewset(viewsets.ModelViewSet):
     serializer_class = JobTypeSerializer
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['name', 'id']  # to filter by facility name or facility id
+    ordering_fields = ['name', 'id']  # to order by facility name or facility id
 
 
 class JobViewset(viewsets.ModelViewSet):
@@ -24,7 +28,8 @@ class JobViewset(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
-    filterset_fields = ['domain_id', 'job_type_id']  # to filter by facility name or facility id
+    filterset_fields = ['domain_id', 'job_type_id','job','id']  # to filter by facility name or facility id
+    ordering_fields = ['domain_id', 'job_type_id','job','id']  # to order by facility name or facility id
 
     def get_queryset(self):
         #print("Aziz request.query_params: ",self.request.query_params['domain_id'])
@@ -60,3 +65,25 @@ class JobUploadView(APIView):
             # print("AZIZ upload line numer done: ", i)
         content = {'upload job file': 'received and created'}
         return Response(content, status=status.HTTP_200_OK)
+
+# JobPaginationViewset is used to paginate the JobModel queryset
+class JobPaginationViewset(viewsets.ModelViewSet):
+    queryset = JobModel.objects.all().order_by('id')
+    serializer_class = JobSerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['domain_id', 'job_type_id','job','id']  # to filter by facility name or facility id
+    ordering_fields = ['domain_id', 'job_type_id','job','id']  # to order by facility name or facility id
+    pagination_class = CustomPageNumberPagination  # to enable pagination
+
+# JobTypePaginationViewset is used to paginate the JobTypeModel queryset
+class JobTypePaginationViewset(viewsets.ModelViewSet):
+    queryset = JobTypeModel.objects.all().order_by('id')
+    serializer_class = JobTypeSerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['name', 'id']  # to filter by facility name or facility id
+    ordering_fields = ['name', 'id']  # to order by facility name or facility id
+    pagination_class = CustomPageNumberPagination  # to enable pagination
