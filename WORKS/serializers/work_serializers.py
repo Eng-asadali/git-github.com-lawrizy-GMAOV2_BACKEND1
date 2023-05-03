@@ -3,7 +3,8 @@ from rest_framework import serializers
 
 from django.conf import settings
 
-from ..models.work_models import WorkStatusModel, WorkOrderStatusModel, WorkOrderModel, WorkOrderPictureModel
+from ..models.work_models import WorkStatusModel, WorkOrderStatusModel, WorkOrderModel, WorkOrderPictureModel, \
+    WorkOrderHourModel
 from django.core.mail import send_mail
 
 class WorkStatusSerializer(serializers.HyperlinkedModelSerializer):
@@ -151,3 +152,11 @@ class WorkOrderPictureSerializer(serializers.HyperlinkedModelSerializer):
         model = WorkOrderPictureModel
         fields = "__all__"
 
+# WorkOrderHourSerializer HyperlinkedModelSerializer is used to write and read the hours of a work order
+class WorkOrderHourSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=False, required=False)  # on met le champs pour forcer l'affichage
+    work_order_id_read_only = serializers.CharField(source='work_order.id', read_only=True, required=False)
+    worker_read_only = serializers.CharField(source='worker.username', read_only=True, required=False)
+    class Meta:
+        model = WorkOrderHourModel
+        fields = "__all__"

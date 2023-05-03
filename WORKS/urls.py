@@ -2,7 +2,7 @@ from rest_framework import routers
 from .views import DomainViewset, JobTypeViewset, JobViewset, WorkStatusViewset, WorkOrderViewset, \
     WorkOrderStatusViewset, DomainUploadView, JobUploadView, WorkOrderPictureViewset, DomainPaginationViewset, \
     JobPaginationViewset, JobTypePaginationViewset, WorkOrderPaginationViewset, WorkOrderArchivePaginationViewset, \
-    WorkOrderStatusArchivePaginationViewset
+    WorkOrderStatusArchivePaginationViewset, WorkOrderHourPaginationViewset
 from django.urls import path
 
 router = routers.SimpleRouter()
@@ -19,6 +19,7 @@ router.register(r'work_order_archive_pagination', WorkOrderArchivePaginationView
 router.register(r'work_order_status_archive_pagination', WorkOrderStatusArchivePaginationViewset)
 router.register(r'work_order_status', WorkOrderStatusViewset)
 router.register(r'work_order_picture', WorkOrderPictureViewset)
+router.register(r'work_order_hour_pagination', WorkOrderHourPaginationViewset)
 
 # pour les Apiview on utilise path
 urlpatterns = [

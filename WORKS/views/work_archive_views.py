@@ -3,13 +3,14 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from ..models.work_models import WorkOrderModel, WorkOrderStatusModel
+from ..models.work_archive_models import WorkOrderArchiveModel, WorkOrderStatusArchiveModel
 from ..serializers.work_serializers import WorkOrderSerializer, WorkOrderStatusSerializer
 from django_filters.rest_framework import DjangoFilterBackend  # to filter the queryset
 from rest_framework import filters  # to filter the queryset
 from gmao.pagination import CustomPageNumberPagination  # to use our custom pagination
 
 class WorkOrderArchivePaginationViewset(viewsets.ModelViewSet):
-    queryset = WorkOrderModel.objects.all().order_by('id')
+    queryset = WorkOrderArchiveModel.objects.all().order_by('id')
     serializer_class = WorkOrderSerializer
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
@@ -21,7 +22,7 @@ class WorkOrderArchivePaginationViewset(viewsets.ModelViewSet):
 
 
 class WorkOrderStatusArchivePaginationViewset(viewsets.ModelViewSet):
-    queryset = WorkOrderStatusModel.objects.all().order_by('id')
+    queryset = WorkOrderStatusArchiveModel.objects.all().order_by('id')
     serializer_class = WorkOrderStatusSerializer
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication

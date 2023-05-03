@@ -183,3 +183,21 @@ def archive_work_order(sender, instance, **kwargs):
 
         # Delete the work order that was archived
         instance.delete()
+
+#WorkHourModel is used to store the hours worked (startHour, endHour) on a work order by a user
+class WorkOrderHourModel(models.Model):
+    work_order = models.ForeignKey(WorkOrderModel, on_delete=models.CASCADE, related_name='work_hours')
+    worker = models.ForeignKey(User, on_delete=models.PROTECT, null=False, blank=False, related_name='user_work_hours')
+    start_datetime = models.DateTimeField(null=False, blank=False)
+    end_datetime = models.DateTimeField(null=True, blank=True) # end_hour can be null if the user is still working on the work order
+    comment = models.CharField(max_length=1000, null=True, blank=True)
+
+    # make indexes for all the fields
+    class Meta:
+        indexes = [
+            models.Index(fields=['work_order', 'worker', 'start_datetime', 'end_datetime']),
+        ]
+
+    def __str__(self):
+        result = f"{self.work_order} -- {self.user} -- {self.start_hour} -- {self.end_hour}"
+        return result
