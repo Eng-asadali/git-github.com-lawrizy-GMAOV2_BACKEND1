@@ -25,7 +25,7 @@ class WorkOrderArchiveModel(models.Model):
     #make indexes for all the fields
     class Meta:
         indexes = [
-            models.Index(fields=['title', 'description', 'room', 'job_type', 'status', 'equipment', 'reporter',
+            models.Index(fields=['title', 'room', 'job_type', 'status', 'equipment', 'reporter',
                                  'assignee', 'job', 'domain', 'creation_date', 'start_date', 'end_date'],
                          name='work_order_archive_idx'),
         ]
@@ -41,4 +41,11 @@ class WorkOrderStatusArchiveModel(models.Model):
     status_after = models.CharField(max_length=255, null=True, blank=True)
     comment = models.CharField(max_length=1000, null=True, blank=True)
     author = models.CharField(max_length=255, null=True, blank=True)
+
+    #make indexes for all the fields
+    class Meta:
+        indexes = [
+            models.Index(fields=['work_order', 'event_date_time', 'status_before', 'status_after', 'author'],
+                         name='work_order_status_archive_idx'),
+        ]
 

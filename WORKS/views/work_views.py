@@ -1,6 +1,5 @@
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 
@@ -35,7 +34,7 @@ class WorkOrderStatusViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]  # to force authentication
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
     filterset_fields = ['work_order']  # to filter by work_order
-    ordering_fields = ['event_date_time']  # to order by event_date_time
+    ordering_fields = ['event_date_time','work_order','author','status_before','status_after','id']  # to order by event_date_time
 
 
 
