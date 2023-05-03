@@ -11,6 +11,8 @@ class GroupSerializer(serializers.ModelSerializer):
 
 # UserSerializer est utilisé pour afficher les users et leurs groupes associés
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    # id: to force the display of the id field
+    id = serializers.IntegerField(read_only=False, required=False)
     groups = GroupSerializer(many=True, required=False)
     #add password field to make it not required
     password = serializers.CharField(write_only=True, required=False, allow_blank=True)

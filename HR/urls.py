@@ -1,9 +1,11 @@
 from rest_framework import routers
-from .views import UserViewset,CurrentUserView
+from .views import UserViewset,CurrentUserView, UserPaginationViewset
 from rest_framework.authtoken import views
 from django.urls import path
+
 router = routers.SimpleRouter()
 router.register(r'user', UserViewset)
+router.register(r'user_pagination', UserPaginationViewset)
 
 urlpatterns = router.urls
 

@@ -1,6 +1,8 @@
-from rest_framework import viewsets
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, filters
 from rest_framework.views import APIView
 
+from gmao.pagination import CustomPageNumberPagination
 from .serializer import ProfileSerializer, UserSerializer
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -26,3 +28,12 @@ class CurrentUserView(APIView):
         serializer = UserSerializer(request.user, context=context)
         return Response(serializer.data)
 
+class UserPaginationViewset(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all().order_by('id')
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['username', 'id','email','first_name']  # to filter by facility name or facility id
+    ordering_fields = ['username', 'id','email','last_name']  # to order by facility name or facility id
+    pagination_class = CustomPageNumberPagination  # to use our custom pagination
