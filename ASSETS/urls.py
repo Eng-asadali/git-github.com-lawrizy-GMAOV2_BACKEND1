@@ -16,7 +16,7 @@ Including another URLconf
 from .views import CompanyViewSet, UploadCompanyView, FacilityViewset, FloorViewSet, \
     RoomViewset, EquipmentViewset, EquipmentFamilyViewset, RoomTypeViewset, RoomTypeUploadView, RoomUploadView, \
     FloorUploadView, FloorPaginationViewSet, FacilityPaginationViewset, RoomPaginationViewset, \
-    RoomTypePaginationViewset, EquipmentPaginationViewset
+    RoomTypePaginationViewset, EquipmentPaginationViewset, CompanyPaginationViewSet
 from rest_framework import routers
 from django.urls import path
 
@@ -25,6 +25,7 @@ router = routers.SimpleRouter()
 router.register(r'company', CompanyViewSet) # le r devant la chaine de caractère signifie raw, donc la chaine de
 # caractere doit être traitée de manière brut
 # sans gérer d'eventuels caractères d'echapement
+router.register(r'company_pagination', CompanyPaginationViewSet)  # to use pagination
 router.register(r'facility', FacilityViewset)
 router.register(r'facility_pagination', FacilityPaginationViewset)  # to use pagination
 router.register(r'floor', FloorViewSet)

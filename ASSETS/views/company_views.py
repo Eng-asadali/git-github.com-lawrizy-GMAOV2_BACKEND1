@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from rest_framework import viewsets
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, filters
+
+from gmao.pagination import CustomPageNumberPagination
 from ..models import Company
 from ..serializers import CompanySerializer
 from rest_framework.authentication import TokenAuthentication  # to use token authentication
@@ -34,3 +36,13 @@ class UploadCompanyView(APIView):
                 a_company.save()
         content = {'upload company file': 'received'}
         return Response(content, status=status.HTTP_200_OK)
+
+class CompanyPaginationViewSet(viewsets.ModelViewSet):
+    queryset = Company.objects.all().order_by('id')
+    serializer_class = CompanySerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]   # to force authentication
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['company_name', 'id']  # to filter by facility name or facility id
+    ordering_fields = ['company_name','id']  # to order by facility name or facility id
+    pagination_class = CustomPageNumberPagination  # to set the pagination class
