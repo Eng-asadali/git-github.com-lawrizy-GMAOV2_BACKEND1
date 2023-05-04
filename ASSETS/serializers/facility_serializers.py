@@ -13,6 +13,7 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     image = serializers.ImageField(allow_null=True, allow_empty_file=True, required=False)
     company = CompanySerializer(many=False, read_only=False) # CompanySerializer est utilisé pour récupérer
                                                             # pas uniquement l'id (hyperlinked) mais aussi les champs text du model
+    company_read_only = serializers.CharField(source='company.company_name', read_only=True, required=False) #this is a read only field used to display the company
 
 
     class Meta:

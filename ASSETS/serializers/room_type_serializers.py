@@ -3,6 +3,7 @@ from ..models import RoomTypeModel
 
 
 class RoomTypeSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=False, required=False)
 
     class Meta:
         model = RoomTypeModel
