@@ -73,8 +73,8 @@ class JobPaginationViewset(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
-    filterset_fields = ['domain_id', 'job_type_id','job','id']  # to filter by facility name or facility id
-    ordering_fields = ['domain_id', 'job_type_id','job','id']  # to order by facility name or facility id
+    filterset_fields = ['domain_id', 'job_type_id','job','id','domain_id__name','job_type_id__name']  # to filter by facility name or facility id
+    ordering_fields = ['domain_id', 'job_type_id','job','id','domain_id__name','job_type_id__name']  # to order by facility name or facility id
     pagination_class = CustomPageNumberPagination  # to enable pagination
 
 # JobTypePaginationViewset is used to paginate the JobTypeModel queryset

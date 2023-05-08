@@ -59,8 +59,10 @@ class WorkOrderPaginationViewset(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
-    filterset_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain','id']  # to filter by room
-    ordering_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain','id']  # to order by room
+    filterset_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain','id','job__job',
+                        'room__floor__facility__facility_name','room__room','status__name','assignee__username']  # to filter by room
+    ordering_fields = ['room', 'job_type', 'status', 'equipment', 'assignee', 'job', 'domain','id','job__job',
+                       'room__floor__facility__facility_name','room__room','status__name','assignee__username']  # to order by room
     pagination_class = CustomPageNumberPagination  # to paginate the list
 
 # WorkOrderHourPaginationViewset is used to paginate the work order list
@@ -73,3 +75,13 @@ class WorkOrderHourPaginationViewset(viewsets.ModelViewSet):
     filterset_fields = ['work_order','id','worker','start_datetime','end_datetime']  # to filter by work_order
     ordering_fields = ['work_order','id','worker','start_datetime','end_datetime']  # to order by work_order
     pagination_class = CustomPageNumberPagination  # to paginate the list
+
+# WorkStatusPaginationViewset is used to paginate the work order list
+class WorkStatusPaginationViewset(viewsets.ModelViewSet):
+    queryset = WorkStatusModel.objects.all().order_by('id')
+    serializer_class = WorkStatusSerializer
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    pagination_class = CustomPageNumberPagination  # to paginate the list
+    filterset_fields = ['id','name','position']  # to filter by work_order
+    ordering_fields = ['id','name','position']  # to order by work_order

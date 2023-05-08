@@ -24,8 +24,8 @@ class EquipmentPaginationViewset(viewsets.ModelViewSet):
     serializer_class = EquipmentSerializer
     queryset = EquipmentModel.objects.all().order_by('id') # to order the queryset for pagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
-    filterset_fields = ['room_id','id','family_id']  # to filter by facility name or facility id
-    ordering_fields = ['room_id','id','family_id']  # to order by facility name or facility id
+    filterset_fields = ['room_id','id','family_id','name','room_id__room']  # to filter by facility name or facility id
+    ordering_fields = ['room_id','id','family_id','name','room_id__room']  # to order by facility name or facility id
     pagination_class = CustomPageNumberPagination  # to set the pagination class
 
 #EquipmentFamilyPaginationViewset is used to paginate the queryset
@@ -33,6 +33,6 @@ class EquipmentFamilyPaginationViewset(viewsets.ModelViewSet):
     serializer_class = EquipmentFamilySerializer
     queryset = EquipmentFamilyModel.objects.all().order_by('id') # to order the queryset for pagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
-    filterset_fields = ['id','parent_id']  # to filter by facility name or facility id
-    ordering_fields = ['id','parent_id']  # to order by facility name or facility id
+    filterset_fields = ['id','parent_id','parent_id__name','name']  # to filter by facility name or facility id
+    ordering_fields = ['id','parent_id','parent_id__name','name']  # to order by facility name or facility id
     pagination_class = CustomPageNumberPagination  # to set the pagination class

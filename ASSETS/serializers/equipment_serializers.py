@@ -13,6 +13,7 @@ class EquipmentSerializer(serializers.HyperlinkedModelSerializer):
 
 # Serializer for Equipment Family
 class EquipmentFamilySerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=False, required=False)
     class Meta:
         model = EquipmentFamilyModel
         fields = '__all__'

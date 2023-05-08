@@ -75,6 +75,6 @@ class FacilityPaginationViewset(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
-    filterset_fields = ['facility_name', 'id']  # to filter by facility name or facility id
-    ordering_fields = ['facility_name', 'id']  # to order by facility name or facility id
+    filterset_fields = ['facility_name', 'id','company','company__company_name']  # to filter by facility name or facility id
+    ordering_fields = ['facility_name', 'id','company','company__company_name']  # to order by facility name or facility id
     pagination_class = CustomPageNumberPagination  # to set the number of items per page

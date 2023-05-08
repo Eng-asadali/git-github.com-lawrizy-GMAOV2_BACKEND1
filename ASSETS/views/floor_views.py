@@ -49,6 +49,6 @@ class FloorPaginationViewSet(viewsets.ModelViewSet):
     queryset = FloorModel.objects.all().order_by('id') #we need to order the queryset by id to use pagination
     serializer_class = FloorSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter] # to filter the queryset
-    filterset_fields = ['facility__facility_name', 'id', 'facility'] # to filter by facility name or facility id
-    ordering_fields = ['facility__facility_name', 'id', 'facility'] # to order by facility name or facility id
+    filterset_fields = ['facility__facility_name', 'id', 'facility','floor','facility__facility_name'] # to filter by facility name or facility id
+    ordering_fields = ['facility__facility_name', 'id', 'facility','floor','facility__facility_name'] # to order by facility name or facility id
     pagination_class = CustomPageNumberPagination # to set the pagination class

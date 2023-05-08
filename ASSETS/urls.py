@@ -16,7 +16,7 @@ Including another URLconf
 from .views import CompanyViewSet, UploadCompanyView, FacilityViewset, FloorViewSet, \
     RoomViewset, EquipmentViewset, EquipmentFamilyViewset, RoomTypeViewset, RoomTypeUploadView, RoomUploadView, \
     FloorUploadView, FloorPaginationViewSet, FacilityPaginationViewset, RoomPaginationViewset, \
-    RoomTypePaginationViewset, EquipmentPaginationViewset, CompanyPaginationViewSet
+    RoomTypePaginationViewset, EquipmentPaginationViewset, CompanyPaginationViewSet, EquipmentFamilyPaginationViewset
 from rest_framework import routers
 from django.urls import path
 
@@ -35,6 +35,7 @@ router.register(r'room_pagination', RoomPaginationViewset)
 router.register(r'equipment', EquipmentViewset)
 router.register(r'equipment_pagination', EquipmentPaginationViewset)
 router.register(r'equipment_family', EquipmentFamilyViewset)
+router.register(r'equipment_family_pagination', EquipmentFamilyPaginationViewset)
 router.register(r'room_type', RoomTypeViewset)
 router.register(r'room_type_pagination', RoomTypePaginationViewset)
 

@@ -1,4 +1,5 @@
-from rest_framework import viewsets, status
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, status, filters
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
@@ -48,5 +49,7 @@ class RoomTypePaginationViewset(viewsets.ModelViewSet):
     serializer_class = RoomTypeSerializer
     authentication_classes = [TokenAuthentication]  # to use token authentication
     permission_classes = [IsAuthenticated]  # to force authentication
-    ordering_fields = ['room_type']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]  # to filter the queryset
+    filterset_fields = ['room_type', 'code']  # to filter by facility name or facility id
+    ordering_fields = ['room_type','code']
     pagination_class = CustomPageNumberPagination # to set the pagination class
