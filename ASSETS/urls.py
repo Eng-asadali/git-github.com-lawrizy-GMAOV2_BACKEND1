@@ -16,7 +16,8 @@ Including another URLconf
 from .views import CompanyViewSet, UploadCompanyView, FacilityViewset, FloorViewSet, \
     RoomViewset, EquipmentViewset, EquipmentFamilyViewset, RoomTypeViewset, RoomTypeUploadView, RoomUploadView, \
     FloorUploadView, FloorPaginationViewSet, FacilityPaginationViewset, RoomPaginationViewset, \
-    RoomTypePaginationViewset, EquipmentPaginationViewset, CompanyPaginationViewSet, EquipmentFamilyPaginationViewset
+    RoomTypePaginationViewset, EquipmentPaginationViewset, CompanyPaginationViewSet, EquipmentFamilyPaginationViewset, \
+    EquipmentFamilyUploadApiView
 from rest_framework import routers
 from django.urls import path
 
@@ -45,7 +46,8 @@ urlpatterns = [
     path('uploadCompany/', UploadCompanyView.as_view()),  # used for csv file batch
     path('room_type/room_type_upload/', RoomTypeUploadView.as_view()),  # used to upload room type csv
     path('room/room_upload/', RoomUploadView.as_view()),
-    path('floor/floor_upload/', FloorUploadView.as_view())
+    path('floor/floor_upload/', FloorUploadView.as_view()),
+    path('equipment_family/equipment_family_upload/', EquipmentFamilyUploadApiView.as_view()),
 ]
 
 urlpatterns += router.urls
