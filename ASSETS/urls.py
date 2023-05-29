@@ -17,7 +17,7 @@ from .views import CompanyViewSet, UploadCompanyView, FacilityViewset, FloorView
     RoomViewset, EquipmentViewset, EquipmentFamilyViewset, RoomTypeViewset, RoomTypeUploadView, RoomUploadView, \
     FloorUploadView, FloorPaginationViewSet, FacilityPaginationViewset, RoomPaginationViewset, \
     RoomTypePaginationViewset, EquipmentPaginationViewset, CompanyPaginationViewSet, EquipmentFamilyPaginationViewset, \
-    EquipmentFamilyUploadApiView
+    EquipmentFamilyUploadApiView, EquipmentUploadApiView
 from rest_framework import routers
 from django.urls import path
 
@@ -48,6 +48,7 @@ urlpatterns = [
     path('room/room_upload/', RoomUploadView.as_view()),
     path('floor/floor_upload/', FloorUploadView.as_view()),
     path('equipment_family/equipment_family_upload/', EquipmentFamilyUploadApiView.as_view()),
+    path('equipment/equipment_upload/', EquipmentUploadApiView.as_view()),
 ]
 
 urlpatterns += router.urls
