@@ -95,9 +95,14 @@ class EquipmentUploadApiView(APIView):
                     a_parent_id = EquipmentFamilyModel.objects.get(id=line[2])
                 else:
                     a_parent_id = None
-                a_room_id = RoomModel.objects.get(id=line[3])
-                a_family_id = EquipmentFamilyModel.objects.get(id=line[4])
-
+                print("AZIZ line[3]-room: ", line[3])
+                a_room_id = RoomModel.objects.get(room=line[3])
+                print("AZIZ line[4]-family: ", line[4])
+                #set the family_id to None if the line[4] is empty
+                if line[4] == "":
+                    a_family_id = None
+                else:
+                    a_family_id = EquipmentFamilyModel.objects.get(name=line[4])
                 an_eqp = EquipmentModel(name=line[0], description=line[1], parent_id=a_parent_id, room_id=a_room_id, family_id=a_family_id)
                 an_eqp.save()
                 # print("AZIZ upload done: ",line)
