@@ -19,6 +19,7 @@ class JobModel(models.Model):
     description = models.TextField(blank=True,null=True)
     job_type_id = models.ForeignKey(JobTypeModel, on_delete=models.PROTECT, null=False, related_name='jobs')
     domain_id = models.ForeignKey(DomainModel, on_delete=models.PROTECT, null=False, related_name='jobs')
+    frequency = models.IntegerField(null=True, blank=True) # frequency in days
 
     def __str__(self):
         return self.job
