@@ -43,6 +43,7 @@ class WorkOrderModel(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True) # auto_now_add is used when we create the first time the object
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
+    scheduled_date = models.DateTimeField(null=True, blank=True) # date used for the scheduling, useful for preventive maintenance
 
     def __str__(self):
         # convert id to string
