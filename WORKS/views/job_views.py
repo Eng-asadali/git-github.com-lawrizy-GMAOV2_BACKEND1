@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authtoken.admin import User
@@ -126,8 +127,9 @@ class CreatePreventiveWo(APIView):
     permission_classes = [IsAuthenticated]  # to force authentication
     #loop on all job/equipment couple from the model, and for each couple create a workorder
     def post(self, request):
-        #loop on all job/equipment couple from the model
-        for jobequipment in JobEquipmentModel.objects.all():
+        # for jobequipment in JobEquipmentModel.objects.all():
+        #loop on the 2 firsts job/equipment couple from the model
+        for jobequipment in JobEquipmentModel.objects.all()[:2]:
             #get job and get equipment
             job = jobequipment.job_id
             equipment = jobequipment.equipment_id
@@ -146,11 +148,18 @@ class CreatePreventiveWo(APIView):
             domain = job.domain_id
             #get the date of the day for the scheduled date from Django library
             scheduled_date = timezone.now()
-            #create a workorder for the job/equipment couple
-            a_workorder = WorkOrderModel(job=job, equipment=equipment, description=description,
-                                         room=room, job_type=job_type, status=a_status, reporter=reporter, domain=domain,
-                                         scheduled_date=scheduled_date)
-            a_workorder.save()
+
+            #loop to create workorder whith scheduled date based on multiple of frequency (in days) start from today
+            # and end at the end of the year - we have 4 types of frequency (in days): 30, 90, 180, 365
+            for i in range(0, 365, frequency):
+                scheduled_date = timezone.now() + timedelta(days=i)
+                #if scheduled date is maximum now+one year
+                if scheduled_date < timezone.now() + timedelta(days=365):
+                    #create a workorder for the job/equipment couple
+                    a_workorder = WorkOrderModel(job=job, equipment=equipment, description=description,
+                                                 room=room, job_type=job_type, status=a_status, reporter=reporter, domain=domain,
+                                                 scheduled_date=scheduled_date)
+                    a_workorder.save()
 
         content = {'CREATE PREVENTIVE WO': 'CREATION DONE'}
         return Response(content, status=status.HTTP_200_OK)
