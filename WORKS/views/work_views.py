@@ -10,7 +10,9 @@ from ..serializers.work_serializers import WorkStatusSerializer, WorkOrderSerial
 from django_filters.rest_framework import DjangoFilterBackend  # to filter the queryset
 from rest_framework import filters  # to filter the queryset
 from gmao.pagination import CustomPageNumberPagination  # to use our custom pagination
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
 class WorkStatusViewset(viewsets.ModelViewSet):
     queryset = WorkStatusModel.objects.all()
@@ -85,3 +87,26 @@ class WorkStatusPaginationViewset(viewsets.ModelViewSet):
     pagination_class = CustomPageNumberPagination  # to paginate the list
     filterset_fields = ['id','name','position']  # to filter by work_order
     ordering_fields = ['id','name','position']  # to order by work_order
+
+#APIview DeletePreventiveWo is used to delete workorders having workorder_status in first position + job_type = preventive
+class DeletePreventiveWo(APIView):
+    parser_classes = [FormParser, MultiPartParser]
+    authentication_classes = [TokenAuthentication]  # to use token authentication
+    permission_classes = [IsAuthenticated]  # to force authentication
+    #loop on all workorders having workorder_status in first position + job_type = preventive
+    def post(self, request):
+        #get position of workorder_status in position having lowest integer value
+        first_position = WorkStatusModel.objects.order_by('position').first().position
+        print("AZIZ first_position",first_position)
+        is_deleted = False
+        #loop on all workorders having workorder_status in first position + job_type = preventive
+        for workorder in WorkOrderModel.objects.filter(job_type__name="préventif", status__position=first_position):
+            #delete the workorder
+            workorder.delete()
+            is_deleted = True
+        if is_deleted:
+            content = {'DELETE PREVENTIVE WO': 'DELETION DONE'}
+            return Response(content, status=status.HTTP_200_OK)
+        else:
+            content = {'DELETE PREVENTIVE WO': 'NO DELETION DONE'}
+            return Response(content, status=status.HTTP_304_NOT_MODIFIED)

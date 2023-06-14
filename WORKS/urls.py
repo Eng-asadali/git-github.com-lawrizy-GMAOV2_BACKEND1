@@ -3,7 +3,7 @@ from .views import DomainViewset, JobTypeViewset, JobViewset, WorkStatusViewset,
     WorkOrderStatusViewset, DomainUploadView, JobUploadView, WorkOrderPictureViewset, DomainPaginationViewset, \
     JobPaginationViewset, JobTypePaginationViewset, WorkOrderPaginationViewset, WorkOrderArchivePaginationViewset, \
     WorkOrderStatusArchivePaginationViewset, WorkOrderHourPaginationViewset, WorkStatusPaginationViewset, \
-    JobEquipmentUploadView, CreatePreventiveWo
+    JobEquipmentUploadView, CreatePreventiveWo, DeletePreventiveWo
 from django.urls import path
 
 router = routers.SimpleRouter()
@@ -29,6 +29,7 @@ urlpatterns = [
     path('job/job_upload/', JobUploadView.as_view()),
     path('job/job_equipment_upload/', JobEquipmentUploadView.as_view()),
     path('job/create_preventive_wo/', CreatePreventiveWo.as_view()),
+    path('delete_preventive_wo/', DeletePreventiveWo.as_view()),
 ]
 
 urlpatterns += router.urls
