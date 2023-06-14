@@ -1,4 +1,6 @@
 from django.db import models
+
+from ASSETS.models import EquipmentModel # used for the JobEquipmentModel
 from .domain_models import DomainModel
 
 class JobTypeModel(models.Model):
@@ -23,3 +25,15 @@ class JobModel(models.Model):
 
     def __str__(self):
         return self.job
+
+#JobEquipmentModel used to store the couple job/equipment for the preventive jobs that will trigger automatically work orders
+class JobEquipmentModel(models.Model):
+    job_id = models.ForeignKey(JobModel, on_delete=models.PROTECT, null=False, related_name='jobs')
+    equipment_id = models.ForeignKey(EquipmentModel, on_delete=models.PROTECT, null=False, related_name='equipments')
+
+    def __str__(self):
+        return self.job_id.job + ' - ' + self.equipment_id.name
+
+    #unicity constraint on the couple job/equipment
+    class Meta:
+        unique_together = ('job_id', 'equipment_id')
