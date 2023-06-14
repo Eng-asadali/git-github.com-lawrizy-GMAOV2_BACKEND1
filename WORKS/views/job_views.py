@@ -129,7 +129,7 @@ class CreatePreventiveWo(APIView):
     def post(self, request):
         # for jobequipment in JobEquipmentModel.objects.all():
         #loop on the 2 firsts job/equipment couple from the model
-        for jobequipment in JobEquipmentModel.objects.all()[:2]:
+        for jobequipment in JobEquipmentModel.objects.all():
             #get job and get equipment
             job = jobequipment.job_id
             equipment = jobequipment.equipment_id
@@ -153,7 +153,7 @@ class CreatePreventiveWo(APIView):
             # and end at the end of the year - we have 4 types of frequency (in days): 30, 90, 180, 365
             for i in range(0, 365, frequency):
                 scheduled_date = timezone.now() + timedelta(days=i)
-                #if scheduled date is maximum now+one year
+                #if scheduled date is less than now+one year
                 if scheduled_date < timezone.now() + timedelta(days=365):
                     #create a workorder for the job/equipment couple
                     a_workorder = WorkOrderModel(job=job, equipment=equipment, description=description,
